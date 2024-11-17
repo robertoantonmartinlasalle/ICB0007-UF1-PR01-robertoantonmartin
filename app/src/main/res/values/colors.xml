@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores básicos -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores personalizados -->
+    <color name="purple_500">#6200EE</color> <!-- Botón de iniciar sesión -->
+    <color name="purple_700">#3700B3</color> <!-- Color más oscuro (opcional) -->
+    <color name="gray">#BDBDBD</color> <!-- Bordes de los campos de texto -->
+    <color name="light_gray">#F5F5F5</color> <!-- Fondo suave para inputs (opcional) -->
+
+    <!-- Colores del fondo -->
+    <color name="background_white">#F9F9F9</color>
+    <color name="background_black">#121212</color> <!-- Para modo oscuro (opcional) -->
 </resources>
