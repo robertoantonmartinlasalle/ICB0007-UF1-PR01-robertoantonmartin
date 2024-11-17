@@ -44,10 +44,10 @@ class SplashActivity : AppCompatActivity() {
 
         // Navegar a la siguiente pantalla después de 3 segundos
         Handler(Looper.getMainLooper()).postDelayed({
-            // Cambiar a MainActivity (puedes cambiarlo a LoginActivity más adelante)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, CredentialActivity::class.java)
             startActivity(intent)
-            finish() // Terminar SplashActivity para evitar regresar
-        }, 3000) // 3000 ms = 3 segundos
+            finish()
+        }, 3000) // 3 segundos
+
     }
 }

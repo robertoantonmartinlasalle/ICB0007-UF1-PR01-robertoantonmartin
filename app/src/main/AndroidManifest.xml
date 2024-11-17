@@ -12,20 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICB0007UF1PR01robertoanton"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CredentialActivity"
+            android:exported="false" />
         <!-- SplashActivity como inicial -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- MainActivity (sin intent-filter) -->
+        </activity> <!-- MainActivity (sin intent-filter) -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>
+
 </manifest>
