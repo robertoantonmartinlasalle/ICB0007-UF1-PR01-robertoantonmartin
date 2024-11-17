@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Añadir texto dinámicamente debajo del logo
         val splashLayout = findViewById<RelativeLayout>(R.id.splashLayout)
-        val logoImage = findViewById<ImageView>(R.id.logoImage) // Cambiado a ImageView
+        val logoImage = findViewById<ImageView>(R.id.logoImage)
 
         // Crear un TextView programáticamente
         val appNameTextView = TextView(this).apply {
@@ -48,6 +48,15 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 3000) // 3 segundos
+    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Por ahora no hay datos dinámicos que guardar
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // Por ahora no hay datos dinámicos que restaurar
     }
 }

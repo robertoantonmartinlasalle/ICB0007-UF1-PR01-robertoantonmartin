@@ -14,4 +14,14 @@ class CredentialActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, LoginFragment())
             .commit()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Por ahora no tenemos datos específicos que guardar
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // Por ahora no tenemos datos específicos que restaurar
+    }
 }
