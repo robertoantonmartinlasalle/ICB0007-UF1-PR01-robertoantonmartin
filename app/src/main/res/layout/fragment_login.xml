@@ -55,6 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
+        android:inputType="textPassword"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="8dp"
         android:padding="12dp"
