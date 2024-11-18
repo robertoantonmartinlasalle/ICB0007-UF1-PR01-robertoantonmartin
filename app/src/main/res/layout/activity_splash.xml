@@ -23,7 +23,7 @@
         android:layout_below="@id/logoImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="by Roberto Anton"
+        android:text="@string/splash_message"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:gravity="center" />
