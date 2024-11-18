@@ -15,4 +15,16 @@
         android:src="@drawable/logo_rocket"
         android:contentDescription="@string/logo_description" />
 
+    <!-- Texto debajo del logo -->
+    <TextView
+        android:id="@+id/appNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="by Roberto Anton"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center" />
 </RelativeLayout>
