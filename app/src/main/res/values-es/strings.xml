@@ -1,0 +1,17 @@
+<resources>
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Cohetes SpaceX</string>
+
+    <!-- Pantalla de Login -->
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="username_hint">Usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="invalid_credentials">Credenciales incorrectas</string>
+    <string name="empty_fields">Por favor, completa los campos</string>
+    <string name="login_successful">Inicio de sesión exitoso</string>
+
+    <!-- Pantalla Splash -->
+    <string name="splash_message">por Roberto Anton</string>
+    <string name="logo_description">Logo de la aplicación SpaceX Rockets</string>
+</resources>

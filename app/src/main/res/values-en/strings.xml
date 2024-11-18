@@ -1,5 +1,5 @@
 <resources>
-    <!-- Nombre de la aplicación -->
+    <!-- App Name -->
     <string name="app_name">SpaceX Rockets</string>
 
     <!-- Login Screen -->

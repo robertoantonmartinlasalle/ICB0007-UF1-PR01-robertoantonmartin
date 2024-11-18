@@ -7,17 +7,19 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Clase que representa la pantalla de inicio o Splash Screen
 class SplashActivity : AppCompatActivity() {
 
+    // Método onCreate: se llama cuando la actividad se crea por primera vez
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_splash) // Establecer el diseño de la actividad
 
-        // Navegar a la siguiente pantalla después de 3 segundos
+        // Usamos lifecycleScope para ejecutar una tarea en segundo plano
         lifecycleScope.launch {
-            delay(3000) // Esperar 3 segundos
+            delay(3000) // Esperar 3 segundos antes de navegar a la siguiente pantalla
             val intent = Intent(this@SplashActivity, CredentialActivity::class.java)
-            startActivity(intent)
+            startActivity(intent) // Iniciar la actividad de credenciales
             finish() // Finalizar esta actividad para que no se pueda volver
         }
     }
