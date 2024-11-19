@@ -14,4 +14,8 @@
     <!-- Splash Screen -->
     <string name="splash_message">by Roberto Anton</string>
     <string name="logo_description">Logo of SpaceX Rockets App</string>
+
+    <!-- Rocket List Screen -->
+    <string name="rocket_list_title">Rocket List</string>
+    <string name="rocket_item_placeholder">Rocket Name</string>
 </resources>

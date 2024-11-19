@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/rocketListFragment">
+
+    <!-- Fragmento para mostrar la lista de cohetes -->
+    <fragment
+        android:id="@+id/rocketListFragment"
+        android:name="com.icb0007_uf1_pr01_robertoanton.RocketListFragment"
+        android:label="@string/rocket_list_title" />
+</navigation>
