@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// Fragmento que muestra una lista de cohetes utilizando un RecyclerView.
+// Fragmento para mostrar la lista de cohetes
 class RocketListFragment : Fragment() {
 
     override fun onCreateView(
@@ -16,26 +17,24 @@ class RocketListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Infla el diseño del fragmento desde el archivo XML (fragment_rocket_list.xml).
+        // Inflar el diseño del fragmento
         val view = inflater.inflate(R.layout.fragment_rocket_list, container, false)
 
-        // Configura el RecyclerView para mostrar la lista de cohetes.
+        // Configurar el RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewRockets)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()) // Configurar la lista como vertical
+        recyclerView.adapter = RocketListAdapter(getSampleData()) { rocketName ->
+            // Acción al hacer clic en un elemento de la lista (navegación usando SafeArgs)
+            val action = RocketListFragmentDirections
+                .actionRocketListFragmentToRocketDetailFragment(rocketName) // Crear la acción con SafeArgs
+            findNavController().navigate(action) // Navegar al fragmento de detalles
+        }
 
-        // Asigna un administrador de diseño al RecyclerView.
-        // En este caso, LinearLayoutManager organiza los elementos en una lista vertical.
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        // Asigna un adaptador al RecyclerView. Este adaptador conecta los datos con las vistas.
-        recyclerView.adapter = RocketListAdapter(getSampleData())
-
-        // Devuelve la vista inflada como el contenido del fragmento.
         return view
     }
 
-    // Método privado para proporcionar datos de ejemplo.
-    // Retorna una lista de nombres de cohetes que se mostrará en el RecyclerView.
+    // Método para generar datos de ejemplo
     private fun getSampleData(): List<String> {
-        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship")
+        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship") // Cohetes de ejemplo
     }
 }

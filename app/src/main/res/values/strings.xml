@@ -18,4 +18,8 @@
     <!-- Rocket List Screen -->
     <string name="rocket_list_title">Rocket List</string>
     <string name="rocket_item_placeholder">Rocket Name</string>
+
+    <!-- Placeholder para el nombre del cohete en el fragmento de detalles -->
+    <string name="rocket_detail_placeholder">Rocket Name Placeholder</string>
+    <string name="rocket_detail_title">Rocket Details</string>
 </resources>
