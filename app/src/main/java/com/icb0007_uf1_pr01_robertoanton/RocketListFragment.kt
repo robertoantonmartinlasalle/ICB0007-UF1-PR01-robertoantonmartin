@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,12 +21,9 @@ class RocketListFragment : Fragment() {
 
         // Configurar el RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewRockets)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext()) // Configurar la lista como vertical
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = RocketListAdapter(getSampleData()) { rocketName ->
-            // Acción al hacer clic en un elemento de la lista (navegación usando SafeArgs)
-            val action = RocketListFragmentDirections
-                .actionRocketListFragmentToRocketDetailFragment(rocketName) // Crear la acción con SafeArgs
-            findNavController().navigate(action) // Navegar al fragmento de detalles
+            // Aquí puedes manejar el clic en un cohete
         }
 
         return view
@@ -35,6 +31,6 @@ class RocketListFragment : Fragment() {
 
     // Método para generar datos de ejemplo
     private fun getSampleData(): List<String> {
-        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship") // Cohetes de ejemplo
+        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship")
     }
 }

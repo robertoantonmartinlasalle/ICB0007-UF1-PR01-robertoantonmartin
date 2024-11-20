@@ -14,19 +14,19 @@ class RocketListAdapter(
 
     // ViewHolder para representar un elemento individual de la lista
     class RocketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val rocketNameTextView: TextView = itemView.findViewById(R.id.textViewRocketName) // TextView para el nombre del cohete
+        val rocketNameTextView: TextView = itemView.findViewById(R.id.textViewRocketName)
     }
 
     // Crear una nueva vista para cada elemento de la lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_rocket, parent, false) // Inflar el diseño para un elemento de la lista
+            .inflate(R.layout.item_rocket, parent, false) // Inflar el diseño del elemento
         return RocketViewHolder(view)
     }
 
     // Vincular los datos (nombre del cohete) a la vista correspondiente
     override fun onBindViewHolder(holder: RocketViewHolder, position: Int) {
-        val rocketName = rockets[position] // Obtener el nombre del cohete en la posición actual
+        val rocketName = rockets[position] // Obtener el nombre del cohete
         holder.rocketNameTextView.text = rocketName // Establecer el texto del TextView
 
         // Configurar el clic para navegar al fragmento de detalles

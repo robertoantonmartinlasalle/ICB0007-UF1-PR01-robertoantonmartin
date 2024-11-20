@@ -1,20 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <!-- Texto para mostrar el nombre del cohete -->
+    <!-- Nombre del cohete -->
     <TextView
         android:id="@+id/textViewRocketName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/rocket_item_placeholder"
+        android:text="Rocket Name Placeholder"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Primer vuelo -->
+    <TextView
+        android:id="@+id/firstFlight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="First Flight Placeholder"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/textViewRocketName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Coste por lanzamiento -->
+    <TextView
+        android:id="@+id/costPerLaunch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cost per Launch Placeholder"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/firstFlight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón de Wikipedia -->
+    <Button
+        android:id="@+id/wikipediaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wikipedia"
+        app:layout_constraintTop_toBottomOf="@id/costPerLaunch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
