@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Campo para el nombre del cohete -->
+    <EditText
+        android:id="@+id/etRocketName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del cohete"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo para la descripción del cohete -->
+    <EditText
+        android:id="@+id/etRocketDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        app:layout_constraintTop_toBottomOf="@id/etRocketName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botón para guardar el cohete -->
+    <Button
+        android:id="@+id/btnSaveRocket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        app:layout_constraintTop_toBottomOf="@id/etRocketDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

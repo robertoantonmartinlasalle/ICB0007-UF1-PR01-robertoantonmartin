@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// Fragmento para mostrar la lista de cohetes
 class RocketListFragment : Fragment() {
 
     override fun onCreateView(
@@ -22,15 +25,28 @@ class RocketListFragment : Fragment() {
         // Configurar el RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewRockets)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = RocketListAdapter(getSampleData()) { rocketName ->
-            // Aquí puedes manejar el clic en un cohete
-        }
+
+        // Llamada a la API para obtener la lista de cohetes
+        RetrofitInstance.api.getRockets().enqueue(object : Callback<List<Rocket>> {
+            override fun onResponse(call: Call<List<Rocket>>, response: Response<List<Rocket>>) {
+                val rockets = response.body()
+                if (rockets != null) {
+                    recyclerView.adapter = RocketAdapter(rockets) { rocket ->
+                        // Navegar al fragmento de detalles con el cohete seleccionado
+                        val action =
+                            RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment(
+                                rocket
+                            )
+                        findNavController().navigate(action)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Rocket>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
 
         return view
-    }
-
-    // Método para generar datos de ejemplo
-    private fun getSampleData(): List<String> {
-        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship")
     }
 }

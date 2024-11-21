@@ -8,10 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 
-// Fragmento para mostrar los detalles de un cohete
 class RocketDetailFragment : Fragment() {
 
-    // Argumentos recibidos desde RocketListFragment usando SafeArgs
     private val args: RocketDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -19,13 +17,24 @@ class RocketDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflar el diseño del fragmento
         val view = inflater.inflate(R.layout.fragment_rocket_detail, container, false)
 
-        // Mostrar el nombre del cohete recibido en el argumento
-        val rocketNameTextView = view.findViewById<TextView>(R.id.textViewRocketDetailName)
-        rocketNameTextView.text = args.rocketName // Mostrar el nombre del cohete
+        val rocket = args.rocket
+
+        view.findViewById<TextView>(R.id.textViewRocketDetailName).text = rocket.name
+        view.findViewById<TextView>(R.id.textViewRocketType).text = "Type: ${rocket.type}"
+        view.findViewById<TextView>(R.id.textViewRocketCountry).text = "Country: ${rocket.country}"
+        view.findViewById<TextView>(R.id.textViewRocketCompany).text = "Company: ${rocket.company}"
+        view.findViewById<TextView>(R.id.textViewRocketSuccessRate).text =
+            "Success Rate: ${rocket.success_rate_pct}%"
+        view.findViewById<TextView>(R.id.textViewRocketCost).text =
+            "Cost per launch: $${rocket.cost_per_launch}"
+        view.findViewById<TextView>(R.id.textViewRocketHeight).text =
+            "Height: ${rocket.height.meters} m / ${rocket.height.feet} ft"
+        view.findViewById<TextView>(R.id.textViewRocketDiameter).text =
+            "Diameter: ${rocket.diameter.meters} m / ${rocket.diameter.feet} ft"
 
         return view
     }
 }
+

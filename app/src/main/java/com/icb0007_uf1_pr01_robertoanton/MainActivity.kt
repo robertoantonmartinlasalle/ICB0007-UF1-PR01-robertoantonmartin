@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.snackbar.Snackbar
 
 // Clase principal de la aplicación para gestionar la navegación entre los fragmentos
 class MainActivity : AppCompatActivity() {
@@ -35,5 +36,26 @@ class MainActivity : AppCompatActivity() {
     // Esto asegura que el usuario puede navegar hacia atrás correctamente
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    // TODO: Ajustar la navegación para incluir la opción de cerrar sesión
+    // Propuesta: Añadir un botón para cerrar sesión desde cualquier punto de la app.
+    // Este botón podría incluirse en el menú o en el RocketListFragment.
+    // Cuando el usuario cierra sesión, se le redirige a CredentialActivity.
+    override fun onBackPressed() {
+        // Preguntar si el usuario quiere salir de la app
+        if (navController.currentDestination?.id == R.id.rocketListFragment) {
+            // Mostrar un mensaje de confirmación antes de cerrar sesión
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "¿Deseas cerrar sesión y volver al inicio?",
+                Snackbar.LENGTH_LONG
+            ).setAction("Cerrar sesión") {
+                // Redirigir a la pantalla de credenciales
+                finish() // Finalizar MainActivity
+            }.show()
+        } else {
+            super.onBackPressed() // Usar el comportamiento estándar
+        }
     }
 }

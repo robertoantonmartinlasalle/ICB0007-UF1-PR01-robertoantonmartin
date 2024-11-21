@@ -1,3 +1,4 @@
+<!-- item_rocket.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -5,14 +6,25 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView android:id="@+id/textViewRocketName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="18sp" android:textStyle="bold" />
-    <TextView android:id="@+id/rocketType" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/successRate" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/costPerLaunch" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/country" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/company" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/description" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/height" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/diameter" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <Button android:id="@+id/wikipediaButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wikipedia" />
+    <TextView
+        android:id="@+id/textViewRocketName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
+    <!-- Botón para Wikipedia -->
+    <Button
+        android:id="@+id/wikipediaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wikipedia"
+        android:layout_marginTop="8dp" />
+
 </LinearLayout>

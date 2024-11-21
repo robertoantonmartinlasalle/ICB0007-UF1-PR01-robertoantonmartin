@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICB0007UF1PR01robertoanton">
 
-        <!-- Actividad principal para pruebas -->
+        <!-- SplashActivity como actividad inicial -->
         <activity
-            android:name=".TestActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,12 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad principal original -->
+        <!-- CredentialActivity -->
+        <activity
+            android:name=".CredentialActivity"
+            android:exported="true" />
+
+        <!-- MainActivity para la lista de cohetes -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
