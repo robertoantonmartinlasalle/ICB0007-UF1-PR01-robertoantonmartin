@@ -5,10 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // Objeto para configurar Retrofit
 object RetrofitInstance {
-    // Base URL de la API de SpaceX
     private const val BASE_URL = "https://api.spacexdata.com/v4/"
 
-    // Inicializamos Retrofit con el patrón Singleton
     val api: SpaceXApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL) // Establece la URL base
