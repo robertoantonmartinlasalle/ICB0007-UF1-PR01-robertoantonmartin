@@ -35,11 +35,18 @@ class RocketAdapter(
         holder.rocketName.text = rocket.name // Establecer el nombre del cohete
         holder.rocketDescription.text = rocket.description // Establecer la descripción del cohete
 
-        // Configurar el clic en el botón de Wikipedia
-        holder.wikipediaButton.setOnClickListener {
-            val context = it.context
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rocket.wikipedia)) // Crear un Intent para abrir el enlace
-            context.startActivity(intent) // Iniciar el Intent
+        // Verificar si el enlace de Wikipedia está disponible
+        if (rocket.wikipedia.isNotEmpty()) {
+            holder.wikipediaButton.visibility = View.VISIBLE // Mostrar el botón si hay enlace
+
+            // Configurar el clic en el botón de Wikipedia
+            holder.wikipediaButton.setOnClickListener {
+                val context = it.context
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rocket.wikipedia)) // Crear un Intent para abrir el enlace
+                context.startActivity(intent) // Iniciar el Intent
+            }
+        } else {
+            holder.wikipediaButton.visibility = View.GONE // Ocultar el botón si no hay enlace
         }
 
         // Configurar el clic en el elemento para mostrar los detalles del cohete

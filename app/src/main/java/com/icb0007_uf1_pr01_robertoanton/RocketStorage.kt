@@ -12,22 +12,36 @@ object RocketStorage {
      * @param type Tipo del cohete
      * @param country País de origen del cohete
      * @param company Empresa que fabrica el cohete
+     * @param cost_per_launch Costo por lanzamiento
+     * @param success_rate_pct Porcentaje de éxito
+     * @param height Altura en metros
+     * @param diameter Diámetro en metros
      */
-    fun addRocket(name: String, description: String, type: String, country: String, company: String) {
+    fun addRocket(
+        name: String,
+        description: String,
+        type: String,
+        country: String,
+        company: String,
+        cost_per_launch: Int,
+        success_rate_pct: Int,
+        height: Double,
+        diameter: Double
+    ) {
         val newRocket = Rocket(
-            name = name, // Nombre único del cohete
-            type = type, // Tipo del cohete
-            active = true, // Por defecto, los cohetes creados manualmente están activos
-            cost_per_launch = 0, // Costo por lanzamiento (puedes agregarlo si es necesario)
-            success_rate_pct = 0, // Porcentaje de éxito (valor predeterminado)
-            country = country, // País de origen
-            company = company, // Empresa fabricante
-            wikipedia = "", // Enlace a Wikipedia (vacío para los creados manualmente)
-            description = description, // Descripción proporcionada por el usuario
-            height = Dimensions(0.0, 0.0), // Altura (valores predeterminados)
-            diameter = Dimensions(0.0, 0.0) // Diámetro (valores predeterminados)
+            name = name,
+            type = type,
+            active = true,
+            cost_per_launch = cost_per_launch,
+            success_rate_pct = success_rate_pct,
+            country = country,
+            company = company,
+            wikipedia = "",
+            description = description,
+            height = Dimensions(height, height * 3.28084),
+            diameter = Dimensions(diameter, diameter * 3.28084)
         )
-        rockets.add(newRocket) // Agregar el nuevo cohete a la lista mutable
+        rockets.add(newRocket)
     }
 
     /**
@@ -35,6 +49,6 @@ object RocketStorage {
      * @return Lista de cohetes creados manualmente
      */
     fun getRockets(): List<Rocket> {
-        return rockets // Retornar una copia inmutable de la lista
+        return rockets
     }
 }

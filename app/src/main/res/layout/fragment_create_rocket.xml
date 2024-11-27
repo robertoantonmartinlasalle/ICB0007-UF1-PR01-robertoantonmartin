@@ -82,13 +82,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Campo para la altura en metros -->
+    <EditText
+        android:id="@+id/etRocketHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Altura (m)"
+        app:layout_constraintTop_toBottomOf="@id/etRocketSuccessRate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para el diámetro en metros -->
+    <EditText
+        android:id="@+id/etRocketDiameter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Diámetro (m)"
+        app:layout_constraintTop_toBottomOf="@id/etRocketHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
     <!-- Botón para guardar -->
     <Button
         android:id="@+id/btnSaveRocket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        app:layout_constraintTop_toBottomOf="@id/etRocketSuccessRate"
+        app:layout_constraintTop_toBottomOf="@id/etRocketDiameter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
