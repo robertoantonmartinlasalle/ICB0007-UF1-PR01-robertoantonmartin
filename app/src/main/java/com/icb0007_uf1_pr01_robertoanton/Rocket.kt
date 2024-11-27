@@ -6,22 +6,22 @@ import kotlinx.parcelize.Parcelize
 // Modelo de datos para un cohete
 @Parcelize
 data class Rocket(
-    val name: String, // Nombre del cohete
-    val type: String, // Tipo de cohete
-    val active: Boolean, // Estado de actividad
-    val cost_per_launch: Int, // Costo por lanzamiento
-    val success_rate_pct: Int, // Porcentaje de éxito
-    val country: String, // País
-    val company: String, // Empresa que lo fabrica
-    val wikipedia: String, // Enlace a Wikipedia
-    val description: String, // Descripción del cohete
-    val height: Dimensions, // Altura del cohete
-    val diameter: Dimensions // Diámetro del cohete
+    var name: String, // Cambiado de val a var para permitir modificaciones
+    var type: String, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var active: Boolean, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var cost_per_launch: Int, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var success_rate_pct: Int, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var country: String, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var company: String, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var wikipedia: String, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var description: String, // Cambiado de val a var para permitir modificaciones
+    var height: Dimensions, // Cambiado de val a var para permitir modificaciones si lo deseas
+    var diameter: Dimensions // Cambiado de val a var para permitir modificaciones si lo deseas
 ) : Parcelable
 
 // Modelo de dimensiones (altura y diámetro)
 @Parcelize
 data class Dimensions(
-    val meters: Double, // Medidas en metros
-    val feet: Double // Medidas en pies
+    var meters: Double, // Cambiado de val a var para permitir modificaciones
+    var feet: Double // Cambiado de val a var para permitir modificaciones
 ) : Parcelable

@@ -8,11 +8,9 @@
         android:id="@+id/rocketListFragment"
         android:name="com.icb0007_uf1_pr01_robertoanton.RocketListFragment"
         android:label="Lista de Cohetes">
-        <!-- Acción para navegar al fragmento de detalles -->
         <action
             android:id="@+id/action_rocketListFragment_to_rocketDetailFragment"
             app:destination="@id/rocketDetailFragment" />
-        <!-- Acción para navegar al fragmento de crear cohete -->
         <action
             android:id="@+id/action_rocketListFragment_to_createRocketFragment"
             app:destination="@id/createRocketFragment" />
@@ -24,6 +22,19 @@
         android:name="com.icb0007_uf1_pr01_robertoanton.RocketDetailFragment"
         android:label="Detalles del Cohete">
         <!-- Argumento para pasar el objeto Rocket -->
+        <argument
+            android:name="rocket"
+            app:argType="com.icb0007_uf1_pr01_robertoanton.Rocket" />
+        <action
+            android:id="@+id/action_rocketDetailFragment_to_editRocketFragment"
+            app:destination="@id/editRocketFragment" />
+    </fragment>
+
+    <!-- Fragmento para editar un cohete -->
+    <fragment
+        android:id="@+id/editRocketFragment"
+        android:name="com.icb0007_uf1_pr01_robertoanton.EditRocketFragment"
+        android:label="Editar Cohete">
         <argument
             android:name="rocket"
             app:argType="com.icb0007_uf1_pr01_robertoanton.Rocket" />

@@ -1,0 +1,85 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etEditRocketName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del cohete" />
+
+        <EditText
+            android:id="@+id/etEditRocketDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción del cohete"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etEditRocketType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tipo de cohete"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etEditRocketCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="País"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etEditRocketCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Empresa"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etEditRocketCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Costo por lanzamiento"
+            android:layout_marginTop="8dp"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etEditRocketSuccessRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Porcentaje de éxito"
+            android:layout_marginTop="8dp"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etEditRocketHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Altura (metros)"
+            android:layout_marginTop="8dp"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etEditRocketDiameter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Diámetro (metros)"
+            android:layout_marginTop="8dp"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnSaveEditRocket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar cambios"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

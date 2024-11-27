@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Texto para mostrar el nombre del cohete -->
     <TextView
         android:id="@+id/textViewRocketDetailName"
         android:layout_width="wrap_content"
@@ -46,4 +47,20 @@
         android:id="@+id/textViewRocketDiameter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <!-- Botón para editar el cohete -->
+    <Button
+        android:id="@+id/btnEditRocket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar Cohete"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botón para eliminar el cohete -->
+    <Button
+        android:id="@+id/btnDeleteRocket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Cohete"
+        android:layout_marginTop="16dp" />
 </LinearLayout>

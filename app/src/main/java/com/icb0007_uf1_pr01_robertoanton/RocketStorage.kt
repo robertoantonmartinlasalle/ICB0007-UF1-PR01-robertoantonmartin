@@ -51,4 +51,31 @@ object RocketStorage {
     fun getRockets(): List<Rocket> {
         return rockets
     }
+
+    /**
+     * Función para eliminar un cohete por su nombre.
+     * @param name Nombre del cohete a eliminar.
+     */
+    fun deleteRocket(name: String) {
+        rockets.removeAll { it.name == name }
+    }
+
+    /**
+     * Función para actualizar un cohete existente.
+     * @param oldName Nombre original del cohete a actualizar.
+     * @param updatedRocket Objeto `Rocket` con los nuevos valores.
+     */
+    fun updateRocket(oldName: String, updatedRocket: Rocket) {
+        rockets.find { it.name == oldName }?.apply {
+            this.name = updatedRocket.name
+            this.description = updatedRocket.description
+            this.type = updatedRocket.type
+            this.country = updatedRocket.country
+            this.company = updatedRocket.company
+            this.cost_per_launch = updatedRocket.cost_per_launch
+            this.success_rate_pct = updatedRocket.success_rate_pct
+            this.height = updatedRocket.height
+            this.diameter = updatedRocket.diameter
+        }
+    }
 }

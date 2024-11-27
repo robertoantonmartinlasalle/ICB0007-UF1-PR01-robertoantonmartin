@@ -54,9 +54,12 @@ class RocketListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Evitar duplicados al actualizar la lista
+
+        // Obtener los cohetes actualizados desde RocketStorage
         val rocketsFromStorage = RocketStorage.getRockets()
-        viewModel.allRockets = mergeLists(viewModel.allRockets, rocketsFromStorage)
+
+        // Actualizar el ViewModel y el RecyclerView
+        viewModel.allRockets = mergeLists(rocketsFromStorage, viewModel.allRockets)
         updateRecyclerView(viewModel.allRockets)
     }
 
@@ -90,20 +93,16 @@ class RocketListFragment : Fragment() {
     }
 
     /**
-     * Combina dos listas de cohetes evitando duplicados.
-     * @param original Lista original (ViewModel)
-     * @param newItems Lista nueva (RocketStorage)
-     * @return Lista combinada sin duplicados
+     * Combina dos listas de cohetes evitando duplicados y eliminados.
+     * @param storageRockets Lista desde RocketStorage (estado actual)
+     * @param viewModelRockets Lista desde el ViewModel (estado anterior)
+     * @return Lista combinada actualizada
      */
-    private fun mergeLists(original: List<Rocket>, newItems: List<Rocket>): List<Rocket> {
-        val combined = original.toMutableList()
+    private fun mergeLists(storageRockets: List<Rocket>, viewModelRockets: List<Rocket>): List<Rocket> {
+        // Crear un mapa basado en los nombres de los cohetes para evitar duplicados
+        val rocketsMap = (viewModelRockets + storageRockets).associateBy { it.name }
 
-        // Agregar solo los cohetes que no están en la lista original
-        newItems.forEach { newRocket ->
-            if (!combined.any { it.name == newRocket.name }) {
-                combined.add(newRocket)
-            }
-        }
-        return combined
+        // Retornar los valores únicos como lista
+        return rocketsMap.values.toList()
     }
 }
