@@ -4,38 +4,65 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// Fragmento que muestra una lista de cohetes utilizando un RecyclerView.
 class RocketListFragment : Fragment() {
+
+    // Declaración del adaptador y lista de cohetes
+    private lateinit var rocketListAdapter: RocketListAdapter
+    private val rockets = mutableListOf<Rocket>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Infla el diseño del fragmento desde el archivo XML (fragment_rocket_list.xml).
+    ): View {
+        // Inflar el layout del fragmento
         val view = inflater.inflate(R.layout.fragment_rocket_list, container, false)
 
-        // Configura el RecyclerView para mostrar la lista de cohetes.
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewRockets)
+        // Configurar el RecyclerView
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()) // Diseño en lista
+        rocketListAdapter = RocketListAdapter(rockets) // Inicializar adaptador con la lista
+        recyclerView.adapter = rocketListAdapter
 
-        // Asigna un administrador de diseño al RecyclerView.
-        // En este caso, LinearLayoutManager organiza los elementos en una lista vertical.
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Llamar a la API para obtener los datos
+        fetchRockets()
 
-        // Asigna un adaptador al RecyclerView. Este adaptador conecta los datos con las vistas.
-        recyclerView.adapter = RocketListAdapter(getSampleData())
-
-        // Devuelve la vista inflada como el contenido del fragmento.
         return view
     }
 
-    // Método privado para proporcionar datos de ejemplo.
-    // Retorna una lista de nombres de cohetes que se mostrará en el RecyclerView.
-    private fun getSampleData(): List<String> {
-        return listOf("Falcon 1", "Falcon 9", "Falcon Heavy", "Starship")
+    private fun fetchRockets() {
+        // Configuración de Retrofit para realizar la llamada a la API
+        val retrofit = RetrofitInstance.getRetrofitInstance()
+        val service = retrofit.create(SpaceXApiService::class.java)
+
+        // Usar corrutinas para realizar la llamada en un hilo de fondo
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = service.getRockets() // Obtener cohetes desde la API
+                withContext(Dispatchers.Main) {
+                    rockets.clear() // Limpiar la lista anterior
+                    rockets.addAll(response) // Añadir los nuevos cohetes
+                    rocketListAdapter.notifyDataSetChanged() // Actualizar RecyclerView
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    // Mostrar mensaje de error
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al obtener los cohetes: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 }

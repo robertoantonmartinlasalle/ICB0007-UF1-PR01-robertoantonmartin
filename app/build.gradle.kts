@@ -57,4 +57,5 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.gson)
+
 }

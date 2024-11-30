@@ -18,4 +18,6 @@
     <!-- Pantalla de Lista de Cohetes -->
     <string name="rocket_list_title">Lista de Cohetes</string>
     <string name="rocket_item_placeholder">Nombre del cohete</string>
+
+    <string name="rocket_image">Imagen del cohete</string>
 </resources>

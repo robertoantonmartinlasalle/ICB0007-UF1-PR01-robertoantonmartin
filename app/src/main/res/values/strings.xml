@@ -18,4 +18,6 @@
     <!-- Rocket List Screen -->
     <string name="rocket_list_title">Rocket List</string>
     <string name="rocket_item_placeholder">Rocket Name</string>
+
+    <string name="rocket_image">Imagen del cohete</string>
 </resources>
