@@ -1,8 +1,11 @@
 package com.icb0007_uf1_pr01_robertoanton
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,6 +19,7 @@ class RocketListAdapter(
     class RocketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.textViewRocketName)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewRocketDescription)
+        val wikipediaButton: Button = itemView.findViewById(R.id.buttonWikipedia) // Botón para Wikipedia
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
@@ -28,6 +32,13 @@ class RocketListAdapter(
         val rocket = rockets[position]
         holder.nameTextView.text = rocket.name
         holder.descriptionTextView.text = rocket.description
+
+        // Configurar el botón para abrir el enlace de Wikipedia
+        holder.wikipediaButton.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rocket.wikipedia))
+            context.startActivity(intent) // Abrir el navegador con el enlace
+        }
 
         // Configurar el evento de clic en el ítem
         holder.itemView.setOnClickListener {

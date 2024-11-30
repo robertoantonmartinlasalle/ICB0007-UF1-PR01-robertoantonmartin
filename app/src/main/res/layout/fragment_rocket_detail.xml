@@ -1,130 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Nombre del cohete -->
         <TextView
             android:id="@+id/textViewRocketName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Nombre: "
             android:textSize="18sp"
             android:textStyle="bold"
-            android:paddingBottom="8dp"
-            android:text="Nombre del cohete" />
+            android:layout_marginBottom="8dp" />
 
-        <!-- Tipo del cohete -->
         <TextView
             android:id="@+id/textViewRocketType"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Tipo de cohete" />
+            android:text="Tipo: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Estado de actividad -->
         <TextView
             android:id="@+id/textViewRocketActive"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Activo o no" />
+            android:text="Activo: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Número de etapas -->
         <TextView
             android:id="@+id/textViewRocketStages"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Número de etapas" />
+            android:text="Etapas: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Número de propulsores -->
         <TextView
             android:id="@+id/textViewRocketBoosters"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Número de propulsores" />
+            android:text="Propulsores: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Costo por lanzamiento -->
         <TextView
             android:id="@+id/textViewRocketCost"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Costo por lanzamiento" />
+            android:text="Costo: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Tasa de éxito -->
         <TextView
             android:id="@+id/textViewRocketSuccessRate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Tasa de éxito" />
+            android:text="Éxito: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Fecha del primer vuelo -->
         <TextView
             android:id="@+id/textViewRocketFirstFlight"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Fecha del primer vuelo" />
+            android:text="Primer vuelo: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- País de origen -->
         <TextView
             android:id="@+id/textViewRocketCountry"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="País de origen" />
+            android:text="País: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Compañía fabricante -->
         <TextView
             android:id="@+id/textViewRocketCompany"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Compañía fabricante" />
+            android:text="Compañía: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Descripción -->
-        <TextView
-            android:id="@+id/textViewRocketDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Descripción" />
 
-        <!-- Altura -->
+
         <TextView
             android:id="@+id/textViewRocketHeight"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Altura" />
+            android:text="Altura: "
+            android:layout_marginBottom="8dp" />
 
-        <!-- Diámetro -->
         <TextView
             android:id="@+id/textViewRocketDiameter"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"
-            android:text="Diámetro" />
+            android:text="Diámetro: "
+            android:layout_marginBottom="8dp" />
+
     </LinearLayout>
 </ScrollView>

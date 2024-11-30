@@ -35,8 +35,7 @@ class RocketDetailFragment : Fragment() {
             "Primer vuelo: ${rocket.firstFlight}"
         view.findViewById<TextView>(R.id.textViewRocketCountry).text = "País: ${rocket.country}"
         view.findViewById<TextView>(R.id.textViewRocketCompany).text = "Compañía: ${rocket.company}"
-        view.findViewById<TextView>(R.id.textViewRocketDescription).text =
-            "Descripción: ${rocket.description}"
+        // view.findViewById<TextView>(R.id.textViewRocketDescription).text = "Descripción: ${rocket.description}"
         view.findViewById<TextView>(R.id.textViewRocketHeight).text =
             "Altura: ${rocket.height.meters ?: "N/A"} metros"
         view.findViewById<TextView>(R.id.textViewRocketDiameter).text =
@@ -45,4 +44,3 @@ class RocketDetailFragment : Fragment() {
         return view
     }
 }
-
