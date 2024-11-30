@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar personalizada -->
+    <!-- Barra de herramientas personalizada -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/white"
-        android:elevation="4dp" />
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Contenedor para el NavHostFragment -->
+    <!-- Fragmento principal que gestiona la navegación -->
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
