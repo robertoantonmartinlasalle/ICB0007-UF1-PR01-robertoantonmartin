@@ -1,8 +1,11 @@
 package com.icb0007_uf1_pr01_robertoanton
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-// Clase de datos para mapear el JSON de la API de SpaceX
+// Modelo principal utilizado para Retrofit, Room y navegación
+@Parcelize
 data class Rocket(
     @SerializedName("id") val id: String, // ID único del cohete
     @SerializedName("name") val name: String, // Nombre del cohete
@@ -19,10 +22,10 @@ data class Rocket(
     @SerializedName("wikipedia") val wikipedia: String, // URL de Wikipedia
     @SerializedName("height") val height: Dimension, // Altura del cohete
     @SerializedName("diameter") val diameter: Dimension // Diámetro del cohete
-)
+) : Parcelable
 
-// Clase para manejar dimensiones en metros y pies
+@Parcelize
 data class Dimension(
     @SerializedName("meters") val meters: Double?, // Dimensión en metros
     @SerializedName("feet") val feet: Double? // Dimensión en pies
-)
+) : Parcelable

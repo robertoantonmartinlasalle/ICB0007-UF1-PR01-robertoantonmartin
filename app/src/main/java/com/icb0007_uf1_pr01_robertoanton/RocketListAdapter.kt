@@ -6,50 +6,34 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-// Adaptador para mostrar la lista de cohetes en un RecyclerView.
-class RocketListAdapter(private val rockets: List<Rocket>) :
-    RecyclerView.Adapter<RocketListAdapter.RocketViewHolder>() {
+// Adaptador para la lista de cohetes
+class RocketListAdapter(
+    private val rockets: List<Rocket>,
+    private val onRocketClicked: (Rocket) -> Unit // Callback para manejar clics en los ítems
+) : RecyclerView.Adapter<RocketListAdapter.RocketViewHolder>() {
 
-    /**
-     * ViewHolder es una clase interna que mantiene referencias a las vistas
-     * de cada elemento del RecyclerView.
-     */
+    // ViewHolder que maneja las vistas de cada ítem
     class RocketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Referencia al TextView que muestra el nombre del cohete.
         val nameTextView: TextView = itemView.findViewById(R.id.textViewRocketName)
-        // Referencia al TextView que muestra la descripción del cohete.
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewRocketDescription)
     }
 
-    /**
-     * Este método se llama cuando se necesita crear un nuevo ViewHolder.
-     * Infla el diseño del elemento de la lista.
-     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
-        // Infla el diseño del item (R.layout.item_rocket).
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_rocket, parent, false)
+            .inflate(R.layout.item_rocket, parent, false) // Inflar el diseño del ítem
         return RocketViewHolder(view)
     }
 
-    /**
-     * Este método se llama para vincular los datos de un elemento de la lista al ViewHolder.
-     * @param holder El ViewHolder en el que se configurarán los datos.
-     * @param position La posición del elemento en la lista.
-     */
     override fun onBindViewHolder(holder: RocketViewHolder, position: Int) {
-        val rocket = rockets[position] // Obtiene el cohete actual de la lista.
-
-        // Configura el texto de las vistas con los datos del cohete.
+        val rocket = rockets[position]
         holder.nameTextView.text = rocket.name
         holder.descriptionTextView.text = rocket.description
+
+        // Configurar el evento de clic en el ítem
+        holder.itemView.setOnClickListener {
+            onRocketClicked(rocket) // Llamar al callback con el cohete seleccionado
+        }
     }
 
-    /**
-     * Este método retorna el número de elementos en la lista.
-     * @return El tamaño de la lista de cohetes.
-     */
-    override fun getItemCount(): Int {
-        return rockets.size
-    }
+    override fun getItemCount(): Int = rockets.size
 }

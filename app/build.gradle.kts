@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.kapt")
+    id("androidx.navigation.safeargs.kotlin") // Habilitar Safe Args
+    id("kotlin-parcelize") // Habilitar soporte para Parcelize
 }
+
 
 android {
     namespace = "com.icb0007_uf1_pr01_robertoanton"
