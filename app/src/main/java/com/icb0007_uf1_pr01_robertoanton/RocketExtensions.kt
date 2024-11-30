@@ -5,12 +5,21 @@ fun Rocket.toEntity(): RocketEntity {
     return RocketEntity(
         id = this.id,
         name = this.name,
+        type = this.type,
         description = this.description,
         country = this.country,
         company = this.company,
         firstFlight = this.firstFlight,
         successRate = this.successRate,
-        active = this.active
+        active = this.active,
+        stages = this.stages,
+        boosters = this.boosters,
+        costPerLaunch = this.costPerLaunch,
+        wikipedia = this.wikipedia,
+        heightMeters = this.height.meters,
+        heightFeet = this.height.feet,
+        diameterMeters = this.diameter.meters,
+        diameterFeet = this.diameter.feet
     )
 }
 
@@ -19,18 +28,18 @@ fun RocketEntity.toRocket(): Rocket {
     return Rocket(
         id = this.id,
         name = this.name,
-        type = "", // Campo no disponible en la entidad
+        type = this.type,
         active = this.active,
-        stages = 0, // Campo no disponible en la entidad
-        boosters = 0, // Campo no disponible en la entidad
-        costPerLaunch = 0L, // Campo no disponible en la entidad
+        stages = this.stages,
+        boosters = this.boosters,
+        costPerLaunch = this.costPerLaunch,
         successRate = this.successRate,
         firstFlight = this.firstFlight,
         country = this.country,
         company = this.company,
         description = this.description,
-        wikipedia = "", // Campo no disponible en la entidad
-        height = Dimension(null, null), // Dimensiones no disponibles en la entidad
-        diameter = Dimension(null, null) // Dimensiones no disponibles en la entidad
+        wikipedia = this.wikipedia,
+        height = Dimension(this.heightMeters, this.heightFeet),
+        diameter = Dimension(this.diameterMeters, this.diameterFeet)
     )
 }

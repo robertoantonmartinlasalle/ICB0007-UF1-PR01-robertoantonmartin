@@ -5,34 +5,36 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// Declaración de la base de datos de Room, especificando la entidad (RocketEntity) y la versión.
-@Database(entities = [RocketEntity::class], version = 1)
+// Anotación @Database define las entidades y la versión de la base de datos.
+// Aquí RocketEntity es la única entidad, y la versión es ahora 2.
+@Database(entities = [RocketEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
-    // Declaración del DAO (Data Access Object) que interactúa con la base de datos.
+    // Método abstracto para acceder al DAO (Data Access Object).
     abstract fun rocketDao(): RocketDao
 
     companion object {
+
+        // Variable para almacenar la instancia de la base de datos.
+        // Volatile garantiza la visibilidad de los cambios entre hilos.
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        /**
-         * Obtiene una instancia de la base de datos.
-         *
-         * - Si ya existe una instancia (singleton), la reutiliza.
-         * - Si no existe, crea una nueva instancia usando Room.
-         * - `.fallbackToDestructiveMigration()` asegura que la base de datos se elimine y recree
-         *   si se detecta un cambio en el esquema (ideal para desarrollo).
-         */
+        // Método para obtener la instancia de la base de datos.
+        // Garantiza que solo exista una única instancia en toda la app (Singleton).
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
+                // Si no hay instancia, se crea una nueva utilizando Room.databaseBuilder.
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database" // Nombre del archivo de la base de datos
+                    "app_database" // Nombre del archivo de la base de datos.
                 )
-                    .fallbackToDestructiveMigration() // Eliminar y recrear la base de datos si hay cambios en el esquema
+                    // Opción para recrear la base de datos si hay cambios en su estructura.
+                    .fallbackToDestructiveMigration()
+                    // Construye la instancia.
                     .build()
+                // Asigna la instancia creada a INSTANCE.
                 INSTANCE = instance
                 instance
             }
