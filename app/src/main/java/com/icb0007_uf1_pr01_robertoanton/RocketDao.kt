@@ -5,19 +5,26 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-// DAO para interactuar con la tabla de cohetes
+// DAO (Data Access Object) para interactuar con la tabla "rockets" de la base de datos
 @Dao
 interface RocketDao {
 
-    // Insertar una lista de cohetes
+    // Insertar una lista de cohetes en la base de datos.
+    // Si un cohete con el mismo ID ya existe, se reemplaza.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(rockets: List<RocketEntity>)
 
-    // Obtener todos los cohetes guardados
+    // Insertar un único cohete en la base de datos.
+    // Si un cohete con el mismo ID ya existe, se reemplaza.
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRocket(rocket: RocketEntity)
+
+    // Obtener todos los cohetes almacenados en la base de datos.
+    // Retorna una lista de todos los registros en la tabla "rockets".
     @Query("SELECT * FROM rockets")
     suspend fun getAllRockets(): List<RocketEntity>
 
-    // Limpiar todos los cohetes
+    // Limpiar la tabla "rockets", eliminando todos los registros existentes.
     @Query("DELETE FROM rockets")
     suspend fun clearAll()
 }

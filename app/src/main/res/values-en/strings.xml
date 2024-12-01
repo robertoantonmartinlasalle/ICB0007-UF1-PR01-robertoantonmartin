@@ -20,4 +20,9 @@
     <string name="rocket_item_placeholder">Rocket Name</string>
 
     <string name="rocket_image">Imagen del cohete</string>
+
+
+    <string name="add_rocket">Añadir Cohete</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="content_description_add_rocket">Añadir Cohete</string>
 </resources>
