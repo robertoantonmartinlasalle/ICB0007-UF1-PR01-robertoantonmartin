@@ -1,6 +1,7 @@
 package com.icb0007_uf1_pr01_robertoanton
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -27,4 +28,8 @@ interface RocketDao {
     // Limpiar la tabla "rockets", eliminando todos los registros existentes.
     @Query("DELETE FROM rockets")
     suspend fun clearAll()
+
+    // Eliminar un cohete específico de la base de datos.
+    @Delete
+    suspend fun delete(rocket: RocketEntity)
 }

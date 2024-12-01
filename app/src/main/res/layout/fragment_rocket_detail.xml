@@ -97,5 +97,23 @@
             android:text="Diámetro: "
             android:layout_marginBottom="8dp" />
 
+        <!-- Botón para editar el cohete -->
+        <Button
+            android:id="@+id/buttonEditRocket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:layout_marginTop="16dp" />
+
+        <!-- Botón para eliminar el cohete -->
+        <Button
+            android:id="@+id/buttonDeleteRocket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FF0000"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
 </ScrollView>

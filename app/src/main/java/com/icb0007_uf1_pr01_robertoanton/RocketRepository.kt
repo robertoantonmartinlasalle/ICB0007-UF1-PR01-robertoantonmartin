@@ -20,4 +20,9 @@ class RocketRepository(private val rocketDao: RocketDao) {
         // Insertar o actualizar el cohete proporcionado
         rocketDao.insertRocket(rocket)
     }
+
+    suspend fun deleteRocket(rocket: RocketEntity) {
+        rocketDao.delete(rocket)
+    }
+
 }

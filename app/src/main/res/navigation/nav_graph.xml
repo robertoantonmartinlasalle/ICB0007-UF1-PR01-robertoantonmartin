@@ -35,6 +35,11 @@
         <argument
             android:name="rocket"
             app:argType="com.icb0007_uf1_pr01_robertoanton.Rocket" />
+
+        <!-- Acción para navegar al fragmento de edición -->
+        <action
+            android:id="@+id/action_rocketDetailFragment_to_editRocketFragment"
+            app:destination="@id/editRocketFragment" />
     </fragment>
 
     <!-- Fragmento para añadir un nuevo cohete -->
@@ -46,6 +51,23 @@
         <!-- Acción para regresar a la lista de cohetes -->
         <action
             android:id="@+id/action_addRocketFragment_to_rocketListFragment"
+            app:destination="@id/rocketListFragment" />
+    </fragment>
+
+    <!-- Fragmento para editar un cohete -->
+    <fragment
+        android:id="@+id/editRocketFragment"
+        android:name="com.icb0007_uf1_pr01_robertoanton.EditRocketFragment"
+        android:label="Editar Cohete">
+
+        <!-- Argumento 'rocket' que se pasa al fragmento de edición -->
+        <argument
+            android:name="rocket"
+            app:argType="com.icb0007_uf1_pr01_robertoanton.Rocket" />
+
+        <!-- Acción para regresar a la lista de cohetes después de editar -->
+        <action
+            android:id="@+id/action_editRocketFragment_to_rocketListFragment"
             app:destination="@id/rocketListFragment" />
     </fragment>
 
