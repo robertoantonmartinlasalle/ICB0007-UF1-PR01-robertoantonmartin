@@ -9,64 +9,148 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Nombre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre:" />
         <EditText
             android:id="@+id/editTextRocketName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre del cohete"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content" />
 
+        <!-- Tipo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo:" />
         <EditText
             android:id="@+id/editTextRocketType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tipo del cohete"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content" />
 
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción:" />
         <EditText
             android:id="@+id/editTextRocketDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Descripción"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content" />
 
+        <!-- Activo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activo:" />
         <CheckBox
             android:id="@+id/checkBoxRocketActive"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Activo"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content" />
 
+        <!-- Etapas -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Etapas:" />
         <EditText
             android:id="@+id/editTextRocketStages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Etapas"
-            android:inputType="number"
-            android:layout_marginBottom="8dp" />
+            android:inputType="number" />
 
+        <!-- Propulsores -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Propulsores:" />
         <EditText
             android:id="@+id/editTextRocketBoosters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Propulsores"
-            android:inputType="number"
-            android:layout_marginBottom="8dp" />
+            android:inputType="number" />
 
+        <!-- Costo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Costo:" />
         <EditText
             android:id="@+id/editTextRocketCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Costo por lanzamiento"
-            android:inputType="numberDecimal"
-            android:layout_marginBottom="8dp" />
+            android:inputType="numberDecimal" />
 
-        <Button
-            android:id="@+id/buttonSaveRocket"
+        <!-- Porcentaje de éxito -->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Guardar cambios"
-            android:layout_marginTop="16dp" />
+            android:text="Porcentaje de éxito:" />
+        <EditText
+            android:id="@+id/editTextRocketSuccessRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
 
+        <!-- Fecha del primer vuelo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha del primer vuelo:" />
+        <EditText
+            android:id="@+id/editTextRocketFirstFlight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+        <!-- País de origen -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="País de origen:" />
+        <EditText
+            android:id="@+id/editTextRocketCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Compañía -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compañía:" />
+        <EditText
+            android:id="@+id/editTextRocketCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Altura (metros) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Altura (metros):" />
+        <EditText
+            android:id="@+id/editTextRocketHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <!-- Diámetro (metros) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diámetro (metros):" />
+        <EditText
+            android:id="@+id/editTextRocketDiameter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/buttonSaveRocket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar cambios" />
     </LinearLayout>
 </ScrollView>

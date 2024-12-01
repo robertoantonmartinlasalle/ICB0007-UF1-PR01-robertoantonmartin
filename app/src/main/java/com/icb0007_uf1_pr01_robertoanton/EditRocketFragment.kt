@@ -13,7 +13,10 @@ import kotlinx.coroutines.launch
 // Fragmento para editar un cohete existente
 class EditRocketFragment : Fragment() {
 
+    // Instancia del cohete que se editará
     private lateinit var rocket: Rocket
+
+    // Repositorio para manejar operaciones con la base de datos
     private lateinit var rocketRepository: RocketRepository
 
     override fun onCreateView(
@@ -21,9 +24,10 @@ class EditRocketFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflar el diseño del fragmento de edición
         val view = inflater.inflate(R.layout.fragment_edit_rocket, container, false)
 
-        // Obtener el cohete desde los argumentos
+        // Obtener el cohete desde los argumentos pasados al fragmento
         rocket = EditRocketFragmentArgs.fromBundle(requireArguments()).rocket
 
         // Inicializar el repositorio para interactuar con la base de datos
@@ -38,8 +42,14 @@ class EditRocketFragment : Fragment() {
         val editTextStages = view.findViewById<EditText>(R.id.editTextRocketStages)
         val editTextBoosters = view.findViewById<EditText>(R.id.editTextRocketBoosters)
         val editTextCost = view.findViewById<EditText>(R.id.editTextRocketCost)
+        val editTextHeight = view.findViewById<EditText>(R.id.editTextRocketHeight)
+        val editTextDiameter = view.findViewById<EditText>(R.id.editTextRocketDiameter)
+        val editTextSuccessRate = view.findViewById<EditText>(R.id.editTextRocketSuccessRate)
+        val editTextFirstFlight = view.findViewById<EditText>(R.id.editTextRocketFirstFlight)
+        val editTextCountry = view.findViewById<EditText>(R.id.editTextRocketCountry)
+        val editTextCompany = view.findViewById<EditText>(R.id.editTextRocketCompany)
 
-        // Cargar datos del cohete en las vistas
+        // Cargar los datos actuales del cohete en las vistas del formulario
         editTextName.setText(rocket.name)
         editTextType.setText(rocket.type)
         editTextDescription.setText(rocket.description)
@@ -47,8 +57,14 @@ class EditRocketFragment : Fragment() {
         editTextStages.setText(rocket.stages.toString())
         editTextBoosters.setText(rocket.boosters.toString())
         editTextCost.setText(rocket.costPerLaunch.toString())
+        editTextHeight.setText(rocket.height.meters?.toString() ?: "")
+        editTextDiameter.setText(rocket.diameter.meters?.toString() ?: "")
+        editTextSuccessRate.setText(rocket.successRate.toString())
+        editTextFirstFlight.setText(rocket.firstFlight)
+        editTextCountry.setText(rocket.country)
+        editTextCompany.setText(rocket.company)
 
-        // Configurar el botón de guardar
+        // Configurar el botón "Guardar cambios"
         view.findViewById<Button>(R.id.buttonSaveRocket).setOnClickListener {
             saveRocket(
                 editTextName.text.toString(),
@@ -57,7 +73,13 @@ class EditRocketFragment : Fragment() {
                 checkBoxActive.isChecked,
                 editTextStages.text.toString().toIntOrNull(),
                 editTextBoosters.text.toString().toIntOrNull(),
-                editTextCost.text.toString().toLongOrNull() // Convertir a Long
+                editTextCost.text.toString().toLongOrNull(),
+                editTextHeight.text.toString().toDoubleOrNull(),
+                editTextDiameter.text.toString().toDoubleOrNull(),
+                editTextSuccessRate.text.toString().toIntOrNull(),
+                editTextFirstFlight.text.toString(),
+                editTextCountry.text.toString(),
+                editTextCompany.text.toString()
             )
         }
 
@@ -74,10 +96,20 @@ class EditRocketFragment : Fragment() {
         active: Boolean,
         stages: Int?,
         boosters: Int?,
-        costPerLaunch: Long? // Cambiado a Long
+        costPerLaunch: Long?,
+        height: Double?,
+        diameter: Double?,
+        successRate: Int?,
+        firstFlight: String?,
+        country: String?,
+        company: String?
     ) {
-        // Validar que todos los campos sean correctos
-        if (name.isBlank() || type.isBlank() || description.isBlank() || stages == null || boosters == null || costPerLaunch == null) {
+        // Validar que todos los campos sean correctos y no nulos
+        if (name.isBlank() || type.isBlank() || description.isBlank() || stages == null ||
+            boosters == null || costPerLaunch == null || height == null || diameter == null ||
+            successRate == null || firstFlight.isNullOrBlank() || country.isNullOrBlank() ||
+            company.isNullOrBlank()
+        ) {
             Toast.makeText(requireContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
             return
         }
@@ -90,14 +122,26 @@ class EditRocketFragment : Fragment() {
             active = active,
             stages = stages,
             boosters = boosters,
-            costPerLaunch = costPerLaunch
+            costPerLaunch = costPerLaunch,
+            height = Dimension(meters = height, feet = height * 3.28084), // Conversión a pies
+            diameter = Dimension(meters = diameter, feet = diameter * 3.28084), // Conversión a pies
+            successRate = successRate,
+            firstFlight = firstFlight,
+            country = country,
+            company = company
         )
 
         // Guardar los cambios en la base de datos
         lifecycleScope.launch {
             rocketRepository.insertRocket(rocket.toEntity())
-            Toast.makeText(requireContext(), "Cohete actualizado con éxito", Toast.LENGTH_SHORT).show()
-            findNavController().navigateUp() // Volver al fragmento anterior
+
+            // Navegar al listado de cohetes
+            try {
+                findNavController().navigate(R.id.action_editRocketFragment_to_rocketListFragment)
+                Toast.makeText(requireContext(), "Cohete actualizado con éxito", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Error al navegar: ${e.message}", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
