@@ -19,12 +19,12 @@ class RocketListAdapter(
     class RocketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.textViewRocketName)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewRocketDescription)
-        val wikipediaButton: Button = itemView.findViewById(R.id.buttonWikipedia) // Botón para Wikipedia
+        val wikipediaButton: Button = itemView.findViewById(R.id.buttonWikipedia)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_rocket, parent, false) // Inflar el diseño del ítem
+            .inflate(R.layout.item_rocket, parent, false)
         return RocketViewHolder(view)
     }
 
@@ -33,16 +33,26 @@ class RocketListAdapter(
         holder.nameTextView.text = rocket.name
         holder.descriptionTextView.text = rocket.description
 
-        // Configurar el botón para abrir el enlace de Wikipedia
-        holder.wikipediaButton.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rocket.wikipedia))
-            context.startActivity(intent) // Abrir el navegador con el enlace
+        // Verificar si el enlace de Wikipedia es genérico o válido
+        val genericWikipediaUrl = "https://es.wikipedia.org/"
+        if (rocket.wikipedia == genericWikipediaUrl || rocket.wikipedia.isNullOrBlank()) {
+            holder.wikipediaButton.text = "No disponible"
+            holder.wikipediaButton.isEnabled = false
+            holder.wikipediaButton.setBackgroundColor(holder.itemView.context.getColor(R.color.gray)) // Cambiar color a gris
+        } else {
+            holder.wikipediaButton.text = "Ver en Wikipedia"
+            holder.wikipediaButton.isEnabled = true
+            holder.wikipediaButton.setBackgroundColor(holder.itemView.context.getColor(R.color.purple_500)) // Color morado
+            holder.wikipediaButton.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(rocket.wikipedia))
+                context.startActivity(intent) // Abrir el enlace en el navegador
+            }
         }
 
-        // Configurar el evento de clic en el ítem
+        // Configurar clic en el ítem de la lista
         holder.itemView.setOnClickListener {
-            onRocketClicked(rocket) // Llamar al callback con el cohete seleccionado
+            onRocketClicked(rocket)
         }
     }
 

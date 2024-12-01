@@ -5,6 +5,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colores personalizados -->
+
     <color name="purple_500">#6200EE</color> <!-- Botón de iniciar sesión -->
     <color name="purple_700">#3700B3</color> <!-- Color más oscuro (opcional) -->
     <color name="gray">#BDBDBD</color> <!-- Bordes de los campos de texto -->

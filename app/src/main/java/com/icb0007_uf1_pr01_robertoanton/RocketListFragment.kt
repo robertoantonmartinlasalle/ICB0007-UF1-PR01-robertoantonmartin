@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 class RocketListFragment : Fragment() {
 
     private lateinit var rocketListAdapter: RocketListAdapter
-    private val rockets = mutableListOf<Rocket>()
+    private val rockets = mutableListOf<Rocket>() // Lista de cohetes en memoria
 
     // Acceso al repositorio para interactuar con la base de datos
     private lateinit var rocketRepository: RocketRepository
