@@ -19,7 +19,7 @@
             android:id="@+id/action_rocketListFragment_to_addRocketFragment"
             app:destination="@id/addRocketFragment" />
 
-        <!-- Acción para navegar al fragmento de inicio de sesión -->
+        <!-- Acción para navegar al fragmento de inicio de sesión (cerrar sesión) -->
         <action
             android:id="@+id/action_rocketListFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -60,5 +60,4 @@
             android:id="@+id/action_loginFragment_to_rocketListFragment"
             app:destination="@id/rocketListFragment" />
     </fragment>
-
 </navigation>

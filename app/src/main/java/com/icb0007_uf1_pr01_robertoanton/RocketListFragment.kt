@@ -3,6 +3,7 @@ package com.icb0007_uf1_pr01_robertoanton
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +50,12 @@ class RocketListFragment : Fragment() {
         }
         recyclerView.adapter = rocketListAdapter
 
+        // Configurar el botón de cerrar sesión
+        val buttonLogout: Button = view.findViewById(R.id.buttonLogout)
+        buttonLogout.setOnClickListener {
+            performLogout() // Llamar a la función para cerrar sesión
+        }
+
         // Cargar los datos desde la base de datos o la API
         loadRockets()
 
@@ -75,9 +82,8 @@ class RocketListFragment : Fragment() {
                 true
             }
             R.id.menu_logout -> {
-                // Acción al pulsar "Cerrar Sesión"
-                findNavController().navigate(R.id.action_rocketListFragment_to_loginFragment)
-                Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
+                // Acción al pulsar "Cerrar Sesión" desde el menú
+                performLogout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -86,14 +92,24 @@ class RocketListFragment : Fragment() {
 
     private fun loadRockets() {
         lifecycleScope.launch {
-            val localRockets = rocketRepository.getAllRockets()
-            if (localRockets.isNotEmpty()) {
-                rockets.clear()
-                rockets.addAll(localRockets.map { it.toRocket() })
-                rocketListAdapter.notifyDataSetChanged()
-                Log.d("RocketList", "Datos cargados desde la base de datos")
-            } else {
-                fetchRocketsFromApi()
+            try {
+                // Obtener los cohetes desde la base de datos local
+                val localRockets = rocketRepository.getAllRockets()
+                if (localRockets.isNotEmpty()) {
+                    rockets.clear()
+                    rockets.addAll(localRockets.map { it.toRocket() })
+                    withContext(Dispatchers.Main) {
+                        rocketListAdapter.notifyDataSetChanged()
+                        Log.d("RocketList", "Datos cargados desde la base de datos")
+                    }
+                } else {
+                    // Si no hay cohetes locales, obtenerlos de la API
+                    fetchRocketsFromApi()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Error al cargar los datos", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -110,6 +126,7 @@ class RocketListFragment : Fragment() {
                     rockets.addAll(response)
                     rocketListAdapter.notifyDataSetChanged()
                     saveRocketsToLocalDatabase(response)
+                    Log.d("RocketList", "Datos cargados desde la API")
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
@@ -126,5 +143,12 @@ class RocketListFragment : Fragment() {
     private suspend fun saveRocketsToLocalDatabase(rockets: List<Rocket>) {
         val rocketEntities = rockets.map { it.toEntity() }
         rocketRepository.insertAllRockets(rocketEntities)
+    }
+
+    private fun performLogout() {
+        // Mostrar un mensaje indicando que se cerró la sesión
+        Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
+        // Navegar al fragmento de login
+        findNavController().navigate(R.id.action_rocketListFragment_to_loginFragment)
     }
 }
