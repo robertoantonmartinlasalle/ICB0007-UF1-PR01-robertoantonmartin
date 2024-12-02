@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Configurar Toolbar como ActionBar
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         // Configurar Retrofit para interactuar con la API
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.spacexdata.com/") // Base URL de la API de SpaceX
