@@ -1,5 +1,7 @@
 package com.icb0007_uf1_pr01_robertoanton
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -53,8 +55,10 @@ class RocketDetailFragment : Fragment() {
             deleteRocket()
         }
 
-        // Configurar el receptor para manejar actualizaciones de datos
-        setFragmentResultListener()
+        // Configurar el clic en el país para abrir Google Maps
+        view.findViewById<TextView>(R.id.textViewRocketCountry).setOnClickListener {
+            openCountryInMaps(rocket.country)
+        }
 
         return view
     }
@@ -76,7 +80,10 @@ class RocketDetailFragment : Fragment() {
             "Éxito: ${rocket.successRate}%"
         view.findViewById<TextView>(R.id.textViewRocketFirstFlight).text =
             "Primer vuelo: ${rocket.firstFlight}"
-        view.findViewById<TextView>(R.id.textViewRocketCountry).text = "País: ${rocket.country}"
+        view.findViewById<TextView>(R.id.textViewRocketCountry).apply {
+            text = "País: ${rocket.country}"
+            setTextColor(resources.getColor(R.color.link_color, null)) // Estilo de enlace
+        }
         view.findViewById<TextView>(R.id.textViewRocketCompany).text =
             "Compañía: ${rocket.company}"
         view.findViewById<TextView>(R.id.textViewRocketHeight).text =
@@ -111,19 +118,21 @@ class RocketDetailFragment : Fragment() {
     }
 
     /**
-     * Método para manejar la actualización de datos del cohete después de regresar del fragmento de edición.
+     * Método para abrir el país en Google Maps.
      */
-    private fun setFragmentResultListener() {
-        // Configurar el receptor para escuchar resultados de edición
-        parentFragmentManager.setFragmentResultListener(
-            "editRocketResult",
-            this
-        ) { _, bundle ->
-            val updatedRocket = bundle.getParcelable<Rocket>("updatedRocket")
-            if (updatedRocket != null) {
-                rocket = updatedRocket
-                configureViews(requireView()) // Actualizar las vistas con los nuevos datos
+    private fun openCountryInMaps(country: String) {
+        try {
+            val geoUri = Uri.parse("geo:0,0?q=$country")
+            val intent = Intent(Intent.ACTION_VIEW, geoUri).apply {
+                setPackage("com.google.android.apps.maps") // Asegura que se abra en Google Maps
             }
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "No se pudo abrir Google Maps. Asegúrate de tenerlo instalado.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

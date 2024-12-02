@@ -14,4 +14,15 @@
     <!-- Colores del fondo -->
     <color name="background_white">#F9F9F9</color>
     <color name="background_black">#121212</color> <!-- Para modo oscuro (opcional) -->
+
+
+    <color name="link_color">#1E88E5</color> <!-- Azul como los enlaces habituales -->
+
+
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+
+
+
+
 </resources>
