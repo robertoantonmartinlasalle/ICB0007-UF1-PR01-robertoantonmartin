@@ -3,7 +3,6 @@ package com.icb0007_uf1_pr01_robertoanton
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -50,12 +49,6 @@ class RocketListFragment : Fragment() {
         }
         recyclerView.adapter = rocketListAdapter
 
-        // Configurar el botón de cerrar sesión
-        val buttonLogout: Button = view.findViewById(R.id.buttonLogout)
-        buttonLogout.setOnClickListener {
-            performLogout() // Llamar a la función para cerrar sesión
-        }
-
         // Cargar los datos desde la base de datos o la API
         loadRockets()
 
@@ -76,11 +69,7 @@ class RocketListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_add_rocket -> {
-                // Acción al pulsar "Añadir Cohete"
-                findNavController().navigate(R.id.action_rocketListFragment_to_addRocketFragment)
-                true
-            }
+
             R.id.menu_logout -> {
                 // Acción al pulsar "Cerrar Sesión" desde el menú
                 performLogout()
@@ -90,6 +79,9 @@ class RocketListFragment : Fragment() {
         }
     }
 
+    /**
+     * Método para cargar los datos de los cohetes.
+     */
     private fun loadRockets() {
         lifecycleScope.launch {
             try {
@@ -114,6 +106,9 @@ class RocketListFragment : Fragment() {
         }
     }
 
+    /**
+     * Método para obtener los cohetes desde la API.
+     */
     private fun fetchRocketsFromApi() {
         val retrofit = RetrofitInstance.getRetrofitInstance()
         val service = retrofit.create(SpaceXApiService::class.java)
@@ -140,11 +135,17 @@ class RocketListFragment : Fragment() {
         }
     }
 
+    /**
+     * Guardar los cohetes obtenidos desde la API en la base de datos local.
+     */
     private suspend fun saveRocketsToLocalDatabase(rockets: List<Rocket>) {
         val rocketEntities = rockets.map { it.toEntity() }
         rocketRepository.insertAllRockets(rocketEntities)
     }
 
+    /**
+     * Método para cerrar sesión y navegar al fragmento de inicio de sesión.
+     */
     private fun performLogout() {
         try {
             Log.d("RocketListFragment", "Cerrando sesión y limpiando pila...")
@@ -159,10 +160,4 @@ class RocketListFragment : Fragment() {
             Log.e("RocketListFragment", "Error al intentar cerrar sesión: ${e.message}")
         }
     }
-
-
-
-
-
-
 }

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+        <!-- Toolbar con título y estilo -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -43,4 +44,7 @@
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/nav_host_fragment"
         app:layout_anchorGravity="bottom|end" />
+
+    <!-- Botón para cerrar sesión eliminado -->
+    <!-- Se eliminó el botón de cerrar sesión ya que el menú superior maneja esta funcionalidad -->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
