@@ -146,9 +146,23 @@ class RocketListFragment : Fragment() {
     }
 
     private fun performLogout() {
-        // Mostrar un mensaje indicando que se cerró la sesión
-        Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
-        // Navegar al fragmento de login
-        findNavController().navigate(R.id.action_rocketListFragment_to_loginFragment)
+        try {
+            Log.d("RocketListFragment", "Cerrando sesión y limpiando pila...")
+            Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
+
+            // Crear un nuevo grafo y navegar al fragmento de inicio de sesión
+            findNavController().apply {
+                popBackStack(R.id.rocketListFragment, true)
+                navigate(R.id.loginFragment)
+            }
+        } catch (e: Exception) {
+            Log.e("RocketListFragment", "Error al intentar cerrar sesión: ${e.message}")
+        }
     }
+
+
+
+
+
+
 }

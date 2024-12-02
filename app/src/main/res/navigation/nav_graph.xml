@@ -20,9 +20,12 @@
             app:destination="@id/addRocketFragment" />
 
         <!-- Acción para navegar al fragmento de inicio de sesión -->
+        <!-- Se asegura que se limpia la pila de navegación -->
         <action
             android:id="@+id/action_rocketListFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/rocketListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- Fragmento para mostrar los detalles de un cohete -->
@@ -51,7 +54,9 @@
         <!-- Acción para regresar a la lista de cohetes -->
         <action
             android:id="@+id/action_addRocketFragment_to_rocketListFragment"
-            app:destination="@id/rocketListFragment" />
+            app:destination="@id/rocketListFragment"
+            app:popUpTo="@id/addRocketFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- Fragmento para editar un cohete -->
@@ -68,12 +73,16 @@
         <!-- Acción para regresar al detalle del cohete después de editar -->
         <action
             android:id="@+id/action_editRocketFragment_to_rocketDetailFragment"
-            app:destination="@id/rocketDetailFragment" />
+            app:destination="@id/rocketDetailFragment"
+            app:popUpTo="@id/editRocketFragment"
+            app:popUpToInclusive="true" />
 
         <!-- Acción para regresar a la lista después de editar -->
         <action
             android:id="@+id/action_editRocketFragment_to_rocketListFragment"
-            app:destination="@id/rocketListFragment" />
+            app:destination="@id/rocketListFragment"
+            app:popUpTo="@id/editRocketFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- Fragmento de inicio de sesión -->
@@ -85,6 +94,8 @@
         <!-- Acción para ir a la lista de cohetes después de iniciar sesión -->
         <action
             android:id="@+id/action_loginFragment_to_rocketListFragment"
-            app:destination="@id/rocketListFragment" />
+            app:destination="@id/rocketListFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
