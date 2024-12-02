@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var fabAddRocket: FloatingActionButton // Referencia al botón flotante
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,11 +62,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Configurar el Floating Action Button (FAB) para añadir un cohete
-        val fabAddRocket = findViewById<FloatingActionButton>(R.id.fab_add_rocket)
+        // Configurar el Floating Action Button (FAB)
+        fabAddRocket = findViewById(R.id.fab_add_rocket)
+
+        // Controlar la visibilidad del FAB según el fragmento activo
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.rocketListFragment -> fabAddRocket.show() // Mostrar solo en la lista de cohetes
+                else -> fabAddRocket.hide() // Ocultar en otros fragmentos
+            }
+        }
+
+        // Configurar la acción al pulsar el FAB
         fabAddRocket.setOnClickListener {
-            val navController = findNavController(R.id.nav_host_fragment)
-            // Navegar al fragmento de añadir cohete
             navController.navigate(R.id.action_rocketListFragment_to_addRocketFragment)
         }
     }
