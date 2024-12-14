@@ -3,29 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white"
+    android:divider="@android:drawable/divider_horizontal_bright"
+    android:showDividers="middle">
 
+    <!-- Nombre del cohete -->
     <TextView
         android:id="@+id/textViewRocketName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rocket Name"
         android:textStyle="bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Descripción del cohete -->
     <TextView
         android:id="@+id/textViewRocketDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rocket Description"
-        android:paddingTop="8dp" />
+        android:paddingTop="4dp"
+        android:textSize="14sp"
+        android:lineSpacingExtra="4dp" />
 
+    <!-- Botón de Wikipedia -->
     <Button
         android:id="@+id/buttonWikipedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
         android:text="Ver en Wikipedia"
-        android:paddingTop="8dp"
+        android:padding="8dp"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white" />
 </LinearLayout>

@@ -38,17 +38,18 @@ class RocketListFragment : Fragment() {
         val database = AppDatabase.getDatabase(requireContext())
         rocketRepository = RocketRepository(database.rocketDao())
 
-        // Configurar RecyclerView
+        // Configurar RecyclerView con un layout vertical
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         rocketListAdapter = RocketListAdapter(filteredRockets) { rocket ->
+            // Navegar al fragmento de detalles del cohete
             val action = RocketListFragmentDirections
                 .actionRocketListFragmentToRocketDetailFragment(rocket)
             findNavController().navigate(action)
         }
         recyclerView.adapter = rocketListAdapter
 
-        // Cargar datos
+        // Cargar los datos al iniciar la vista
         loadRockets()
 
         return view
@@ -56,26 +57,27 @@ class RocketListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        loadRockets() // Recargar la lista
+        loadRockets() // Recargar la lista al reanudar el fragmento
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_rocket_list, menu)
 
-        // Configurar SearchView
+        // Configurar SearchView para filtrar cohetes
         val searchItem = menu.findItem(R.id.menu_search)
         val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = "Buscar cohetes..."
+        searchView.queryHint = "Buscar cohetes..." // Mensaje de ayuda en el campo de búsqueda
 
+        // Listener para manejar el texto introducido por el usuario
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterRockets(query)
+                filterRockets(query) // Filtrar cohetes al enviar texto
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterRockets(newText)
+                filterRockets(newText) // Filtrar cohetes mientras el usuario escribe
                 return true
             }
         })
@@ -83,26 +85,31 @@ class RocketListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            // Cerrar sesión al seleccionar la opción en el menú
             R.id.menu_logout -> {
-                performLogout() // Lógica de cerrar sesión
+                performLogout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    /**
+     * Cargar los datos de cohetes desde la base de datos local o la API.
+     */
     private fun loadRockets() {
         lifecycleScope.launch {
             try {
-                val localRockets = rocketRepository.getAllRockets()
+                val localRockets = rocketRepository.getAllRockets() // Obtener cohetes locales
                 withContext(Dispatchers.Main) {
                     rockets.clear()
                     rockets.addAll(localRockets.map { it.toRocket() })
                     filteredRockets.clear()
-                    filteredRockets.addAll(rockets)
+                    filteredRockets.addAll(rockets) // Inicializar lista filtrada con todos los cohetes
                     rocketListAdapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
+                // Mostrar un mensaje de error si falla la carga
                 withContext(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Error al cargar los datos", Toast.LENGTH_SHORT).show()
                 }
@@ -110,11 +117,16 @@ class RocketListFragment : Fragment() {
         }
     }
 
+    /**
+     * Filtrar la lista de cohetes según el texto introducido.
+     */
     private fun filterRockets(query: String?) {
         filteredRockets.clear()
         if (query.isNullOrEmpty()) {
+            // Si el texto está vacío, mostrar todos los cohetes
             filteredRockets.addAll(rockets)
         } else {
+            // Filtrar cohetes que coincidan con el nombre o descripción
             filteredRockets.addAll(
                 rockets.filter { rocket ->
                     rocket.name.contains(query, ignoreCase = true) ||
@@ -125,12 +137,15 @@ class RocketListFragment : Fragment() {
         rocketListAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Manejar el cierre de sesión y redirigir al fragmento de inicio de sesión.
+     */
     private fun performLogout() {
         try {
             Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
             findNavController().apply {
-                popBackStack(R.id.rocketListFragment, true)
-                navigate(R.id.loginFragment)
+                popBackStack(R.id.rocketListFragment, true) // Limpiar pila de navegación
+                navigate(R.id.loginFragment) // Navegar al fragmento de inicio de sesión
             }
         } catch (e: Exception) {
             Log.e("RocketListFragment", "Error al intentar cerrar sesión: ${e.message}")

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,12 +38,10 @@
         android:id="@+id/fab_add_rocket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/content_description_add_rocket"
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/nav_host_fragment"
         app:layout_anchorGravity="bottom|end" />
 
-    <!-- Botón para cerrar sesión eliminado -->
-    <!-- Se eliminó el botón de cerrar sesión ya que el menú superior maneja esta funcionalidad -->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
