@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,15 +17,14 @@ import kotlinx.coroutines.withContext
 class RocketListFragment : Fragment() {
 
     private lateinit var rocketListAdapter: RocketListAdapter
-    private val rockets = mutableListOf<Rocket>() // Lista de cohetes en memoria
+    private val rockets = mutableListOf<Rocket>() // Lista original de cohetes
+    private val filteredRockets = mutableListOf<Rocket>() // Lista filtrada de cohetes
 
-    // Acceso al repositorio para interactuar con la base de datos
-    private lateinit var rocketRepository: RocketRepository
+    private lateinit var rocketRepository: RocketRepository // Repositorio de la base de datos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Indicar que este fragmento tiene un menú
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(true) // Indicar que este fragmento tiene un menú
     }
 
     override fun onCreateView(
@@ -34,22 +34,21 @@ class RocketListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_rocket_list, container, false)
 
-        // Inicializar el repositorio con acceso a la base de datos
+        // Inicializar el repositorio
         val database = AppDatabase.getDatabase(requireContext())
         rocketRepository = RocketRepository(database.rocketDao())
 
-        // Configurar el RecyclerView para mostrar la lista de cohetes
+        // Configurar RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        rocketListAdapter = RocketListAdapter(rockets) { rocket ->
-            // Navegar al fragmento de detalles pasando el cohete seleccionado
+        rocketListAdapter = RocketListAdapter(filteredRockets) { rocket ->
             val action = RocketListFragmentDirections
                 .actionRocketListFragmentToRocketDetailFragment(rocket)
             findNavController().navigate(action)
         }
         recyclerView.adapter = rocketListAdapter
 
-        // Cargar los datos desde la base de datos o la API
+        // Cargar datos
         loadRockets()
 
         return view
@@ -57,46 +56,51 @@ class RocketListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Forzar la recarga de la lista al volver a este fragmento
-        loadRockets()
-        Log.d("RocketList", "Lista recargada en onResume.")
+        loadRockets() // Recargar la lista
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_rocket_list, menu) // Inflar el archivo XML del menú
+        inflater.inflate(R.menu.menu_rocket_list, menu)
+
+        // Configurar SearchView
+        val searchItem = menu.findItem(R.id.menu_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.queryHint = "Buscar cohetes..."
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterRockets(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterRockets(newText)
+                return true
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-
             R.id.menu_logout -> {
-                // Acción al pulsar "Cerrar Sesión" desde el menú
-                performLogout()
+                performLogout() // Lógica de cerrar sesión
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    /**
-     * Método para cargar los datos de los cohetes.
-     */
     private fun loadRockets() {
         lifecycleScope.launch {
             try {
-                // Obtener los cohetes desde la base de datos local
                 val localRockets = rocketRepository.getAllRockets()
-                if (localRockets.isNotEmpty()) {
+                withContext(Dispatchers.Main) {
                     rockets.clear()
                     rockets.addAll(localRockets.map { it.toRocket() })
-                    withContext(Dispatchers.Main) {
-                        rocketListAdapter.notifyDataSetChanged()
-                        Log.d("RocketList", "Datos cargados desde la base de datos")
-                    }
-                } else {
-                    // Si no hay cohetes locales, obtenerlos de la API
-                    fetchRocketsFromApi()
+                    filteredRockets.clear()
+                    filteredRockets.addAll(rockets)
+                    rocketListAdapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
@@ -106,52 +110,24 @@ class RocketListFragment : Fragment() {
         }
     }
 
-    /**
-     * Método para obtener los cohetes desde la API.
-     */
-    private fun fetchRocketsFromApi() {
-        val retrofit = RetrofitInstance.getRetrofitInstance()
-        val service = retrofit.create(SpaceXApiService::class.java)
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val response = service.getRockets()
-                withContext(Dispatchers.Main) {
-                    rockets.clear()
-                    rockets.addAll(response)
-                    rocketListAdapter.notifyDataSetChanged()
-                    saveRocketsToLocalDatabase(response)
-                    Log.d("RocketList", "Datos cargados desde la API")
+    private fun filterRockets(query: String?) {
+        filteredRockets.clear()
+        if (query.isNullOrEmpty()) {
+            filteredRockets.addAll(rockets)
+        } else {
+            filteredRockets.addAll(
+                rockets.filter { rocket ->
+                    rocket.name.contains(query, ignoreCase = true) ||
+                            rocket.description.contains(query, ignoreCase = true)
                 }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Error al obtener los cohetes: ${e.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
+            )
         }
+        rocketListAdapter.notifyDataSetChanged()
     }
 
-    /**
-     * Guardar los cohetes obtenidos desde la API en la base de datos local.
-     */
-    private suspend fun saveRocketsToLocalDatabase(rockets: List<Rocket>) {
-        val rocketEntities = rockets.map { it.toEntity() }
-        rocketRepository.insertAllRockets(rocketEntities)
-    }
-
-    /**
-     * Método para cerrar sesión y navegar al fragmento de inicio de sesión.
-     */
     private fun performLogout() {
         try {
-            Log.d("RocketListFragment", "Cerrando sesión y limpiando pila...")
             Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
-
-            // Crear un nuevo grafo y navegar al fragmento de inicio de sesión
             findNavController().apply {
                 popBackStack(R.id.rocketListFragment, true)
                 navigate(R.id.loginFragment)

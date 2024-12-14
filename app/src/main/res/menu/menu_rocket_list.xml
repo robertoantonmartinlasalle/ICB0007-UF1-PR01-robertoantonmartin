@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Opción para buscar cohetes -->
+    <item
+        android:id="@+id/menu_search"
+        android:title="Buscar"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <!-- Opción para cerrar sesión -->
     <item
