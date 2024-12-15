@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Título principal: Nombre del cohete -->
+    <TextView
+        android:id="@+id/textViewRocketName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Contenedor para las características -->
+    <ScrollView
+        android:id="@+id/scrollViewRocketDetails"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewRocketName"
+        app:layout_constraintBottom_toTopOf="@id/buttonEditRocket"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textViewRocketType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activo: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketStages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Etapas: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketBoosters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Propulsores: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Costo: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketSuccessRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Éxito: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketFirstFlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Primer vuelo: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="País: "
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/purple_700"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+
+
+            <TextView
+                android:id="@+id/textViewRocketCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compañía: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Altura: "
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRocketDiameter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diámetro: "
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón para editar el cohete -->
+    <Button
+        android:id="@+id/buttonEditRocket"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Editar"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonDeleteRocket" />
+
+    <!-- Botón para eliminar el cohete -->
+    <Button
+        android:id="@+id/buttonDeleteRocket"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FF0000"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
