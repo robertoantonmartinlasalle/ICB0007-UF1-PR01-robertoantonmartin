@@ -1,5 +1,6 @@
 package com.icb0007_uf1_pr01_robertoanton
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,10 +10,16 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AddRocketFragment : Fragment() {
 
     private lateinit var rocketRepository: RocketRepository
+
+    // Calendario para manejar la fecha seleccionada
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +31,7 @@ class AddRocketFragment : Fragment() {
         val database = AppDatabase.getDatabase(requireContext())
         rocketRepository = RocketRepository(database.rocketDao())
 
-        // Referenciar todos los campos del diseño XML
+        // Referenciar campos del diseño XML
         val editTextName = view.findViewById<EditText>(R.id.editTextRocketName)
         val editTextDescription = view.findViewById<EditText>(R.id.editTextRocketDescription)
         val editTextType = view.findViewById<EditText>(R.id.editTextRocketType)
@@ -40,7 +47,12 @@ class AddRocketFragment : Fragment() {
         val editTextDiameter = view.findViewById<EditText>(R.id.editTextRocketDiameter)
         val buttonSave = view.findViewById<Button>(R.id.buttonSaveRocket)
 
-        // Configurar el botón para guardar el nuevo cohete
+        // Mostrar DatePicker al hacer clic en "Fecha del primer vuelo"
+        editTextFirstFlight.setOnClickListener {
+            showDatePickerDialog(editTextFirstFlight)
+        }
+
+        // Configurar el botón para guardar
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString()
             val description = editTextDescription.text.toString()
@@ -56,9 +68,9 @@ class AddRocketFragment : Fragment() {
             val heightMeters = editTextHeight.text.toString().toDoubleOrNull()
             val diameterMeters = editTextDiameter.text.toString().toDoubleOrNull()
 
-            // Validar los datos
-            if (name.isBlank() || description.isBlank() || type.isBlank() || country.isBlank() || company.isBlank()) {
-                Toast.makeText(requireContext(), "Por favor, completa todos los campos obligatorios.", Toast.LENGTH_SHORT).show()
+            // Validar campos obligatorios
+            if (name.isBlank() || description.isBlank() || type.isBlank() || firstFlight.isBlank()) {
+                Toast.makeText(requireContext(), "Por favor, completa los campos obligatorios.", Toast.LENGTH_SHORT).show()
             } else {
                 val newRocket = RocketEntity(
                     id = System.currentTimeMillis().toString(),
@@ -86,12 +98,35 @@ class AddRocketFragment : Fragment() {
         return view
     }
 
+    /**
+     * Función que muestra el DatePickerDialog para seleccionar una fecha.
+     */
+    private fun showDatePickerDialog(editText: EditText) {
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                // Configurar la fecha seleccionada en formato YYYY-MM-DD
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, month, dayOfMonth)
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                editText.setText(dateFormat.format(selectedDate.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+    }
+
+    /**
+     * Función para guardar un cohete en la base de datos.
+     */
     private fun saveRocketToDatabase(rocket: RocketEntity) {
         lifecycleScope.launch {
             try {
                 rocketRepository.insertRocket(rocket)
                 Toast.makeText(requireContext(), "Cohete añadido correctamente.", Toast.LENGTH_SHORT).show()
-                requireActivity().onBackPressed()
+                requireActivity().onBackPressedDispatcher.onBackPressed()
             } catch (e: Exception) {
                 Log.e("AddRocketFragment", "Error al guardar el cohete", e)
                 Toast.makeText(requireContext(), "Error al guardar el cohete.", Toast.LENGTH_SHORT).show()

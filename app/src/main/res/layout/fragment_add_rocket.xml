@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Este archivo XML representa el layout para añadir un nuevo cohete -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- Layout principal que contiene los campos de entrada -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Título de la pantalla -->
         <TextView
             android:id="@+id/textViewAddRocket"
             android:layout_width="wrap_content"
@@ -19,6 +22,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
+        <!-- Campo para el nombre del cohete -->
         <EditText
             android:id="@+id/editTextRocketName"
             android:layout_width="match_parent"
@@ -27,6 +31,7 @@
             android:inputType="text"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para la descripción del cohete -->
         <EditText
             android:id="@+id/editTextRocketDescription"
             android:layout_width="match_parent"
@@ -35,6 +40,7 @@
             android:inputType="text"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el tipo de cohete -->
         <EditText
             android:id="@+id/editTextRocketType"
             android:layout_width="match_parent"
@@ -43,6 +49,7 @@
             android:inputType="text"
             android:layout_marginBottom="8dp" />
 
+        <!-- Switch para indicar si el cohete está activo -->
         <Switch
             android:id="@+id/switchRocketActive"
             android:layout_width="wrap_content"
@@ -50,6 +57,7 @@
             android:text="¿Activo?"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el número de etapas -->
         <EditText
             android:id="@+id/editTextRocketStages"
             android:layout_width="match_parent"
@@ -58,6 +66,7 @@
             android:inputType="number"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el número de propulsores -->
         <EditText
             android:id="@+id/editTextRocketBoosters"
             android:layout_width="match_parent"
@@ -66,6 +75,7 @@
             android:inputType="number"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el costo por lanzamiento -->
         <EditText
             android:id="@+id/editTextRocketCost"
             android:layout_width="match_parent"
@@ -74,6 +84,7 @@
             android:inputType="number"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el porcentaje de éxito -->
         <EditText
             android:id="@+id/editTextRocketSuccessRate"
             android:layout_width="match_parent"
@@ -82,14 +93,17 @@
             android:inputType="number"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para la fecha del primer vuelo -->
         <EditText
             android:id="@+id/editTextRocketFirstFlight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Fecha del primer vuelo"
-            android:inputType="date"
-            android:layout_marginBottom="8dp" />
+            android:focusable="false"
+        android:clickable="true"
+        android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el país de origen -->
         <EditText
             android:id="@+id/editTextRocketCountry"
             android:layout_width="match_parent"
@@ -98,6 +112,7 @@
             android:inputType="text"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para la compañía -->
         <EditText
             android:id="@+id/editTextRocketCompany"
             android:layout_width="match_parent"
@@ -106,6 +121,7 @@
             android:inputType="text"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para la altura -->
         <EditText
             android:id="@+id/editTextRocketHeight"
             android:layout_width="match_parent"
@@ -114,6 +130,7 @@
             android:inputType="numberDecimal"
             android:layout_marginBottom="8dp" />
 
+        <!-- Campo para el diámetro -->
         <EditText
             android:id="@+id/editTextRocketDiameter"
             android:layout_width="match_parent"
@@ -122,6 +139,7 @@
             android:inputType="numberDecimal"
             android:layout_marginBottom="8dp" />
 
+        <!-- Botón para guardar el cohete -->
         <Button
             android:id="@+id/buttonSaveRocket"
             android:layout_width="match_parent"
