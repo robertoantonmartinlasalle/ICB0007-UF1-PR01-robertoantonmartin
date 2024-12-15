@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,16 +26,11 @@ class RocketListFragment : Fragment() {
 
     private lateinit var rocketRepository: RocketRepository // Repositorio de la base de datos
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true) // Indicar que este fragmento tiene un menú
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_rocket_list, container, false)
 
         // Inicializar el repositorio
@@ -50,56 +48,57 @@ class RocketListFragment : Fragment() {
         // Cargar los datos al iniciar la vista
         loadRockets()
 
+        // Configurar el menú usando MenuHost y MenuProvider
+        setupMenu()
+
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        loadRockets() // Recargar la lista al reanudar el fragmento
-    }
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity() // Obtiene el host del menú
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Inflar el menú en la barra de herramientas
+                menuInflater.inflate(R.menu.menu_rocket_list, menu)
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_rocket_list, menu)
+                // Configurar el SearchView para el menú de búsqueda
+                val searchItem = menu.findItem(R.id.menu_search)
+                val searchView = searchItem.actionView as SearchView
+                searchView.queryHint = "Buscar cohetes..."
 
-        val searchItem = menu.findItem(R.id.menu_search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = "Buscar cohetes..."
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        filterRockets(query)
+                        return true
+                    }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                filterRockets(query)
-                return true
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        filterRockets(newText)
+                        return true
+                    }
+                })
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterRockets(newText)
-                return true
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_logout -> {
+                        performLogout()
+                        true
+                    }
+                    else -> false
+                }
             }
-        })
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED) // El menú se asocia al Lifecycle del Fragment
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_logout -> {
-                performLogout()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    /**
-     * Manejar el clic en un cohete.
-     */
     private fun handleRocketClick(rocket: Rocket) {
         val detailsView = view?.findViewById<View>(R.id.detailsView)
         if (detailsView != null) {
-            // Mostrar el fragmento de detalles en el contenedor derecho SIN los botones Editar y Eliminar
+            // Mostrar detalles en pantalla dividida sin botones
             val fragment = RocketDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("rocket", rocket)
-                    putBoolean("showButtons", false) // Pasar la bandera para ocultar botones
+                    putBoolean("showButtons", false)
                 }
             }
             parentFragmentManager.commit {
@@ -107,7 +106,7 @@ class RocketListFragment : Fragment() {
                 setReorderingAllowed(true)
             }
         } else {
-            // Navegar al fragmento de detalles en modo portrait
+            // Navegación estándar en modo portrait
             val action = RocketListFragmentDirections
                 .actionRocketListFragmentToRocketDetailFragment(rocket)
             findNavController().navigate(action)
