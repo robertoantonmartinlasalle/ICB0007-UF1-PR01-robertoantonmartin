@@ -19,7 +19,8 @@
         <!-- CredentialActivity -->
         <activity
             android:name=".CredentialActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <!-- SplashActivity como inicial -->
         <activity
