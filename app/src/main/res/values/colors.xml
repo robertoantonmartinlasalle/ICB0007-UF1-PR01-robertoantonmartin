@@ -5,24 +5,34 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colores personalizados -->
-
     <color name="purple_500">#6200EE</color> <!-- Botón de iniciar sesión -->
     <color name="purple_700">#3700B3</color> <!-- Color más oscuro (opcional) -->
     <color name="gray">#BDBDBD</color> <!-- Bordes de los campos de texto -->
     <color name="light_gray">#F5F5F5</color> <!-- Fondo suave para inputs (opcional) -->
 
     <!-- Colores del fondo -->
-    <color name="background_white">#F9F9F9</color>
-    <color name="background_black">#121212</color> <!-- Para modo oscuro (opcional) -->
+    <color name="background_white">#F9F9F9</color> <!-- Fondo claro -->
+    <color name="background_black">#121212</color> <!-- Fondo oscuro -->
 
-
+    <!-- Colores extras -->
     <color name="link_color">#1E88E5</color> <!-- Azul como los enlaces habituales -->
-
-
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="red">#FF0000</color>
 
+    <!-- Colores para modo claro -->
+    <color name="light_primary">#6200EE</color> <!-- Color primario -->
+    <color name="light_secondary">#3700B3</color> <!-- Color secundario -->
+    <color name="light_background">#F9F9F9</color> <!-- Fondo claro -->
+    <color name="light_text">#000000</color> <!-- Texto oscuro -->
 
+    <!-- Colores para modo oscuro -->
+    <color name="dark_primary">#BB86FC</color> <!-- Color primario oscuro -->
+    <color name="dark_secondary">#3700B3</color> <!-- Color secundario oscuro -->
+    <color name="dark_background">#121212</color> <!-- Fondo oscuro -->
+    <color name="dark_text">#FFFFFF</color> <!-- Texto claro -->
 
+    <!-- Colores para botones -->
+    <color name="button_background">#03DAC5</color> <!-- Fondo botón -->
+    <color name="button_text">#FFFFFF</color> <!-- Texto del botón -->
 </resources>
