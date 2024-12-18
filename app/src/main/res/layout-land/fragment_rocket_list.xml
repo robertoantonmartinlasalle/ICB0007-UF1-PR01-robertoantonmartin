@@ -10,10 +10,11 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/detailsView"
+        app:layout_constraintEnd_toStartOf="@id/detailsView"
         android:padding="8dp" />
 
     <!-- Contenedor lateral para los detalles del cohete -->
@@ -21,11 +22,11 @@
         android:id="@+id/detailsView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="?attr/colorDetailBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/recyclerView"
-        app:layout_constraintWidth_percent="0.4" /> <!-- Ocupa el 40% del ancho total -->
+        app:layout_constraintWidth_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
