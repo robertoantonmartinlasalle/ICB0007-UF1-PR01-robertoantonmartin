@@ -29,4 +29,11 @@ class LoginViewModel(application: Application, private val state: SavedStateHand
             state[KEY_PASSWORD] = value
             sharedPreferences.edit().putString(KEY_PASSWORD, value).apply()
         }
+
+    // Método para limpiar los datos almacenados
+    fun clearData() {
+        sharedPreferences.edit().clear().apply() // Borra los datos del SharedPreferences
+        state[KEY_USERNAME] = "" // Restablece el SavedStateHandle
+        state[KEY_PASSWORD] = ""
+    }
 }

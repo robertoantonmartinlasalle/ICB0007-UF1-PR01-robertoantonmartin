@@ -19,76 +19,77 @@ class LoginFragment : Fragment() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
 
-    // Instancia del ViewModel usando SavedStateHandle
+    // Instancia del ViewModel que usa SavedStateHandle para persistir datos entre recreaciones
     private val loginViewModel: LoginViewModel by viewModels()
 
     companion object {
-        private const val DEFAULT_USERNAME = "admin"
-        private const val DEFAULT_PASSWORD = "1234"
+        private const val DEFAULT_USERNAME = "admin" // Usuario predeterminado
+        private const val DEFAULT_PASSWORD = "1234" // Contraseña predeterminada
     }
 
+    // Método que infla la vista del fragmento
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflar la vista del fragmento
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    // Método que inicializa las vistas y configura la lógica del fragmento
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Referencias a las vistas
+        // Enlazar las vistas del diseño con sus respectivas variables
         usernameEditText = view.findViewById(R.id.etUsername)
         passwordEditText = view.findViewById(R.id.etPassword)
         loginButton = view.findViewById(R.id.btnLogin)
 
-        // Restaurar valores del ViewModel
+        // Condición para limpiar los datos solo al iniciar la app (no durante la rotación)
+        if (savedInstanceState == null && loginViewModel.username.isEmpty() && loginViewModel.password.isEmpty()) {
+            loginViewModel.clearData() // Limpia los campos si no hay datos previos
+        }
+
+        // Restaurar los valores guardados en el ViewModel
         usernameEditText.setText(loginViewModel.username)
         passwordEditText.setText(loginViewModel.password)
 
-        // TextWatcher para actualizar el ViewModel en tiempo real
+        // Listener para actualizar el ViewModel cuando el usuario escribe en el campo de usuario
         usernameEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No se necesita implementar
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Actualizar el ViewModel con el valor actual
-                loginViewModel.username = s.toString()
+                loginViewModel.username = s.toString() // Actualiza el nombre de usuario en el ViewModel
             }
-
-            override fun afterTextChanged(s: Editable?) {
-                // No se necesita implementar
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
+        // Listener para actualizar el ViewModel cuando el usuario escribe en el campo de contraseña
         passwordEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No se necesita implementar
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Actualizar el ViewModel con el valor actual
-                loginViewModel.password = s.toString()
+                loginViewModel.password = s.toString() // Actualiza la contraseña en el ViewModel
             }
-
-            override fun afterTextChanged(s: Editable?) {
-                // No se necesita implementar
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Acción del botón de inicio de sesión
+        // Configuración del botón de inicio de sesión
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
 
+            // Verifica si las credenciales coinciden con las predeterminadas
             if (username == DEFAULT_USERNAME && password == DEFAULT_PASSWORD) {
+                // Muestra un mensaje de inicio de sesión exitoso
                 Toast.makeText(requireContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+
+                // Limpia los datos antes de navegar a la siguiente actividad
+                loginViewModel.clearData()
+
+                // Navega a la MainActivity
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             } else {
+                // Muestra un mensaje de error si las credenciales son incorrectas
                 Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         }
