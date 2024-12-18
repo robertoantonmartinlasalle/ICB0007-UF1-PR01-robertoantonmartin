@@ -2,6 +2,8 @@ package com.icb0007_uf1_pr01_robertoanton
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,14 +47,36 @@ class LoginFragment : Fragment() {
         usernameEditText.setText(loginViewModel.username)
         passwordEditText.setText(loginViewModel.password)
 
-        // Listener para actualizar el ViewModel en tiempo real
-        usernameEditText.setOnFocusChangeListener { _, _ ->
-            loginViewModel.username = usernameEditText.text.toString()
-        }
+        // TextWatcher para actualizar el ViewModel en tiempo real
+        usernameEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No se necesita implementar
+            }
 
-        passwordEditText.setOnFocusChangeListener { _, _ ->
-            loginViewModel.password = passwordEditText.text.toString()
-        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Actualizar el ViewModel con el valor actual
+                loginViewModel.username = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No se necesita implementar
+            }
+        })
+
+        passwordEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No se necesita implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Actualizar el ViewModel con el valor actual
+                loginViewModel.password = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No se necesita implementar
+            }
+        })
 
         // Acción del botón de inicio de sesión
         loginButton.setOnClickListener {

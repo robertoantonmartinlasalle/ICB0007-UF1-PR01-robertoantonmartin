@@ -22,9 +22,7 @@
         <!-- Acción para navegar al fragmento de inicio de sesión -->
         <action
             android:id="@+id/action_rocketListFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/rocketListFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <!-- Fragmento para mostrar los detalles de un cohete -->
