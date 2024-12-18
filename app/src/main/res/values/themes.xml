@@ -2,17 +2,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Tema claro -->
     <style name="Base.Theme.ICB0007UF1PR01robertoanton" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Colores para el modo claro -->
+
+        <!-- Colores base -->
         <item name="colorPrimary">@color/light_primary</item>
         <item name="colorSecondary">@color/light_secondary</item>
         <item name="android:windowBackground">@color/light_background</item>
         <item name="android:textColorPrimary">@color/light_text</item>
+        <item name="android:textColor">@color/black</item>
 
-        <!-- Atributos personalizados -->
+        <!-- Colores personalizados -->
         <item name="colorBackground">@color/light_background</item>
         <item name="colorButtonBackground">@color/button_background</item>
         <item name="colorButtonText">@color/button_text</item>
+        <item name="colorDetailBackground">@color/dark_green_background</item>
+
+        <!-- Estilo para PopupMenu -->
+        <item name="android:popupMenuStyle">@style/CustomPopupMenuStyle</item>
+        <item name="popupMenuStyle">@style/CustomPopupMenuStyle</item>
     </style>
 
+    <!-- Estilo global del menú emergente -->
+    <style name="CustomPopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:background">@color/white</item> <!-- Fondo blanco -->
+        <item name="android:textColor">@color/black</item> <!-- Texto negro -->
+    </style>
+
+    <!-- Tema principal -->
     <style name="Theme.ICB0007UF1PR01robertoanton" parent="Base.Theme.ICB0007UF1PR01robertoanton" />
 </resources>

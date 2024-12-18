@@ -2,15 +2,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Tema oscuro -->
     <style name="Base.Theme.ICB0007UF1PR01robertoanton" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Colores para el modo oscuro -->
+
+        <!-- Colores base -->
         <item name="colorPrimary">@color/dark_primary</item>
         <item name="colorSecondary">@color/dark_secondary</item>
-        <item name="android:windowBackground">@color/dark_background</item>
-        <item name="android:textColorPrimary">@color/dark_text</item>
+        <item name="android:windowBackground">@color/dark_green_background</item>
+        <item name="android:textColorPrimary">@color/white</item>
 
-        <!-- Atributos personalizados -->
-        <item name="colorBackground">@color/dark_background</item>
-        <item name="colorButtonBackground">@color/button_background</item>
+        <!-- Colores personalizados -->
+        <item name="colorBackground">@color/dark_detail_background</item>
+        <item name="colorDetailBackground">@color/dark_green_background</item>
+        <item name="colorButtonBackground">@color/dark_green_background</item>
         <item name="colorButtonText">@color/button_text</item>
+
+        <!-- Forzar estilo para PopupMenu -->
+        <item name="android:popupMenuStyle">@style/CustomPopupMenuStyle</item>
+        <item name="popupMenuStyle">@style/CustomPopupMenuStyle</item>
+    </style>
+
+    <!-- Estilo global del menú emergente -->
+    <style name="CustomPopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

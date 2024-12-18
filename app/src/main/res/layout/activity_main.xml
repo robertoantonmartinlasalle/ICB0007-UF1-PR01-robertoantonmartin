@@ -20,7 +20,7 @@
             android:background="@color/purple_500"
             android:title="SpaceX Rockets"
             android:titleTextColor="@android:color/white"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/CustomPopupMenuStyle" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Contenedor del fragmento, ajustado debajo del AppBar -->

@@ -5,23 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     tools:context=".RocketListFragment">
 
-    <!-- Espacio superior para asegurarse de que el RecyclerView no interfiera con la barra superior -->
+    <!-- Espacio superior -->
     <View
         android:id="@+id/spaceTop"
         android:layout_width="match_parent"
         android:layout_height="16dp"
+        android:background="?attr/colorBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView para mostrar la lista de cohetes -->
+    <!-- RecyclerView para lista de cohetes -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="8dp"
+        android:background="?attr/colorBackground"
         tools:listitem="@layout/item_rocket"
         app:layout_constraintTop_toBottomOf="@id/spaceTop"
         app:layout_constraintBottom_toBottomOf="parent"
