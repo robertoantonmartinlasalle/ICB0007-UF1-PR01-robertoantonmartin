@@ -1,5 +1,5 @@
 package com.icb0007_uf1_pr01_robertoanton
-
+// Actua de conversor de datos entre Rocket y RocketEntity
 // Extensión para convertir Rocket a RocketEntity
 fun Rocket.toEntity(): RocketEntity {
     return RocketEntity(

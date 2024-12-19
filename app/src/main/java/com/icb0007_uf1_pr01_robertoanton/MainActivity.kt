@@ -12,6 +12,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/* Hay que tener en cuenta que para la realización de la práctica me basé en el esquema de múltiple
+   activityS
+*/
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fabAddRocket: FloatingActionButton // Referencia al botón flotante
@@ -66,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Configurar el Floating Action Button (FAB)
+        // Configurar el Floating Action Button (FAB) para agregar cohetes
         fabAddRocket = findViewById(R.id.fab_add_rocket)
 
         // Controlar la visibilidad del FAB según el fragmento activo
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Configurar la acción al pulsar el FAB
+        // Configurar la acción al pulsar el botón de añadir el cohete
         fabAddRocket.setOnClickListener {
             navController.navigate(R.id.action_rocketListFragment_to_addRocketFragment)
         }

@@ -20,6 +20,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginButton: Button
 
     // Instancia del ViewModel que usa SavedStateHandle para persistir datos entre recreaciones
+    // Tuve complicaciones pero con la última modificación conseguí que fuera persistente
     private val loginViewModel: LoginViewModel by viewModels()
 
     companion object {
@@ -44,7 +45,10 @@ class LoginFragment : Fragment() {
         passwordEditText = view.findViewById(R.id.etPassword)
         loginButton = view.findViewById(R.id.btnLogin)
 
-        // Condición para limpiar los datos solo al iniciar la app (no durante la rotación)
+        /* Condición para limpiar los datos solo al iniciar la app (no durante la rotación)
+           Tuve más adelante un problema y que me surgio con el viewmodel y tuve que implementar
+           esta solución, ya que cuando iniciaba la app los datos introducidos persistìan.*/
+
         if (savedInstanceState == null && loginViewModel.username.isEmpty() && loginViewModel.password.isEmpty()) {
             loginViewModel.clearData() // Limpia los campos si no hay datos previos
         }

@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// Clase que representa la pantalla de inicio o Splash Screen
+// Clase que representa la pantalla de inicio o SplashScreen
 class SplashActivity : AppCompatActivity() {
 
     // Método onCreate: se llama cuando la actividad se crea por primera vez

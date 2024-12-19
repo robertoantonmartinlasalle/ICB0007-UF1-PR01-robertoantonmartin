@@ -18,6 +18,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/* Conforme fui avanzando la app tuve que realizar varias modificaciones para que fuera completamente
+funcional
+*/
 class RocketListFragment : Fragment() {
 
     private lateinit var rocketListAdapter: RocketListAdapter

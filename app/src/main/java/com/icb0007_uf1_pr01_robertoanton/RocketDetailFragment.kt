@@ -103,7 +103,9 @@ class RocketDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
-
+    /* Para adecuar a la tarea tarea de mostrar la ubicación del cohete en el maps establezco la
+    función openCountryInMaps
+    */
     /**
      * Abrir el país en Google Maps.
      */

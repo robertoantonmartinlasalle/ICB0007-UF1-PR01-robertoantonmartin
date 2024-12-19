@@ -31,6 +31,7 @@ data class Rocket(
  * Modelo para las dimensiones físicas de un cohete (altura o diámetro).
  * Puede contener valores en metros y pies.
  */
+// Para evitar conflictos establezco que puedan ser nulos
 @Parcelize
 data class Dimension(
     @SerializedName("meters") val meters: Double?, // Dimensión en metros (puede ser nulo si no está disponible)

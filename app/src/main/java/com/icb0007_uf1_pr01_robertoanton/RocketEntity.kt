@@ -3,7 +3,7 @@
     import androidx.room.Entity
     import androidx.room.PrimaryKey
 
-    // Entidad para la base de datos Room
+    // Es necesario definir una entidad para Room
     @Entity(tableName = "rockets")
     data class RocketEntity(
         @PrimaryKey val id: String,

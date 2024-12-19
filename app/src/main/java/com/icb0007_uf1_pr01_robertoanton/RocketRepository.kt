@@ -15,7 +15,7 @@ class RocketRepository(private val rocketDao: RocketDao) {
         rocketDao.insertAll(rockets)
     }
 
-    // Insertar un único cohete en la base de datos Room
+    // Insertar un cohete en la base de datos Room
     suspend fun insertRocket(rocket: RocketEntity) {
         // Insertar o actualizar el cohete proporcionado
         rocketDao.insertRocket(rocket)

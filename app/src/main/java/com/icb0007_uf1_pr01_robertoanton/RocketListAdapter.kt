@@ -57,7 +57,7 @@ class RocketListAdapter(
             }
         }
 
-        // Configurar el clic en el ítem completo para manejar detalles del cohete
+        // Configurar el click en el ítem completo para manejar detalles del cohete
         holder.itemView.setOnClickListener {
             onRocketClicked(rocket)
         }

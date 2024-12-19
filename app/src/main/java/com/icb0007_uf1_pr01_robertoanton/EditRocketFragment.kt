@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 
-// Fragmento para editar un cohete existente
+// Fragmento para editar un cohete ya existente
 class EditRocketFragment : Fragment() {
 
     // Instancia del cohete que se editará
@@ -34,7 +34,7 @@ class EditRocketFragment : Fragment() {
         val database = AppDatabase.getDatabase(requireContext())
         rocketRepository = RocketRepository(database.rocketDao())
 
-        // Configurar vistas
+        // Configuración de las vistas
         val editTextName = view.findViewById<EditText>(R.id.editTextRocketName)
         val editTextType = view.findViewById<EditText>(R.id.editTextRocketType)
         val editTextDescription = view.findViewById<EditText>(R.id.editTextRocketDescription)
@@ -49,7 +49,7 @@ class EditRocketFragment : Fragment() {
         val editTextCountry = view.findViewById<EditText>(R.id.editTextRocketCountry)
         val editTextCompany = view.findViewById<EditText>(R.id.editTextRocketCompany)
 
-        // Cargar los datos actuales del cohete en las vistas del formulario
+        // Para cargar los datos actuales del cohete en las vistas del formulario
         editTextName.setText(rocket.name)
         editTextType.setText(rocket.type)
         editTextDescription.setText(rocket.description)
@@ -64,7 +64,7 @@ class EditRocketFragment : Fragment() {
         editTextCountry.setText(rocket.country)
         editTextCompany.setText(rocket.company)
 
-        // Configurar el botón "Guardar cambios"
+        // Configuración  del botón para "Guardar cambios"
         view.findViewById<Button>(R.id.buttonSaveRocket).setOnClickListener {
             saveRocket(
                 editTextName.text.toString(),
@@ -114,7 +114,7 @@ class EditRocketFragment : Fragment() {
             return
         }
 
-        // Actualizar los datos del cohete
+        // Para actualizar los datos del cohete
         rocket = rocket.copy(
             name = name,
             type = type,
@@ -135,7 +135,7 @@ class EditRocketFragment : Fragment() {
         lifecycleScope.launch {
             rocketRepository.insertRocket(rocket.toEntity())
 
-            // Navegar al listado de cohetes
+            // Se navega de vuelta al listado de cohetes
             try {
                 findNavController().navigate(R.id.action_editRocketFragment_to_rocketListFragment)
                 Toast.makeText(requireContext(), "Cohete actualizado con éxito", Toast.LENGTH_SHORT).show()

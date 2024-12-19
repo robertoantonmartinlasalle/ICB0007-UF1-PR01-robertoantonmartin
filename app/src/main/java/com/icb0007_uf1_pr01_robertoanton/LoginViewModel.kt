@@ -5,6 +5,12 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 
+/* Más adelante cuando avance mi proyecto no se guardaba persistentemente la información y tuve
+   que rehacer el viewmodel del login con modificaciones para solventar el error. Establecí la
+   función clearData() para limpiar los datos del SharedPreferences y el SavedStateHandle ya que
+   me encontré con el inconveniente de que luego, los datos persistían al inicializar o cerrar sesión
+
+*/
 class LoginViewModel(application: Application, private val state: SavedStateHandle) : AndroidViewModel(application) {
 
     companion object {
